@@ -3,7 +3,8 @@ import NumberGrid from './Numbergrid.jsx';
 
 function Home() {
     return (
-        <div className="h-[60vh] lg:h-screen flex flex-col w-full">
+         <div className="h-portrait-60 h-landscape-full flex flex-col w-full">
+
             {/* Section 1: 15% - Blue */}
             <div className="h-[7%] w-full bg-blue-600 flex items-center justify-center p-4">
                 <span className="text-white font-bold text-sm lg:text-lg text-center">Section 1 (7%)</span>

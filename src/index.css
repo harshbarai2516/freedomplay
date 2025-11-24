@@ -9,3 +9,18 @@ html, body, #root {
   padding: 0;
 }
 
+@layer utilities {
+  @media (orientation: portrait) {
+    .h-portrait-60 {
+      height: 60vh;
+    }
+  }
+
+  @media (orientation: landscape) {
+    .h-landscape-full {
+      height: 100vh;
+    }
+  }
+}
+
+
