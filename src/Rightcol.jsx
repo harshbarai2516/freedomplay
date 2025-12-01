@@ -3,8 +3,8 @@ import React from "react";
 export default function RightCol() {
   const rows = 10;
   const columns = [
-    { title: "Quantity", color: "#1a2d5a" },
-    { title: "Amount", color: "#1a5a3a" },
+    { title: "Qty", color: "#1a2d5a" },
+    { title: "Amt", color: "#1a5a3a" },
   ];
 
   return (
@@ -18,7 +18,7 @@ export default function RightCol() {
               style={{
                 backgroundColor: col.color,
                 fontSize: "calc(10px + 0.4vw)",
-                height: "calc(50px + 0.5vh)",
+                height: "calc(20px + 0.5vh)",
               }}
             >
               {col.title}
