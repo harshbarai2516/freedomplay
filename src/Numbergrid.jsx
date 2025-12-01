@@ -26,7 +26,7 @@ const NumberGrid = () => {
                             className="border-r border-gray-300 flex flex-col items-center justify-center"
                         >
                             <div>{col}</div>
-                            <div className="w-9 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-purple-500 rounded-full mt-1" />
+                            <div className="w-4 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-purple-500 rounded-full mt-0" />
                         </div>
                     ))}
                 </div>
@@ -40,7 +40,7 @@ const NumberGrid = () => {
                         {/* F0, F1... with capsule below */}
                         <div className="bg-gray-200 border-r border-gray-300 flex flex-col items-center justify-center font-semibold text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm">
                             <div>{rowLabel}</div>
-                            <div className="w-9 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-purple-500 rounded-full mt-1" />
+                            <div className="w-4 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-purple-500 rounded-full mt-0" />
                         </div>
 
                         {/* Numbers with capsules below */}
@@ -52,7 +52,7 @@ const NumberGrid = () => {
                                 <div className="text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm font-bold text-gray-800">
                                     {getNumber(rowIndex, colIndex)}
                                 </div>
-                                <div className="w-9 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-purple-500 rounded-full mt-1" />
+                                <div className="w-4 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-purple-500 rounded-full mt-0" />
                             </div>
                         ))}
                     </div>
