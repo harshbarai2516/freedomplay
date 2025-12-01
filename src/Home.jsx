@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import NumberGrid from './Numbergrid.jsx';
+import Leftcol from './Leftcol.jsx';
+import RightCol from './Rightcol.jsx';
 
 function Home() {
     return (
@@ -28,8 +30,8 @@ function Home() {
             {/* Section 5: 50% - Divided into 3 horizontal parts */}
             <div className="h-[70%] w-full flex flex-row">
                 {/* Section 5.1: Left - Blue */}
-                <div className="w-[18%] lg:w-[18%] bg-blue-500 flex items-center justify-center p-4">
-                    <span className="text-white font-bold text-xs lg:text-base text-center">Section 5.1</span>
+                <div className="w-[18%] lg:w-[18%] bg-blue-500 flex items-center justify-center p-0">
+                   <Leftcol />
                 </div>
 
                 {/* Section 5.2: 60% - Center - Purple */}
@@ -40,10 +42,8 @@ function Home() {
                 </div>
 
                 {/* Section 5.3: Right - Teal */}
-                <div className="w-[17%] lg:w-[17%] bg-teal-500 flex items-center justify-center p-4">
-                    <span className="text-white font-bold text-xs lg:text-base text-center">
-                        Set
-                    </span>
+                <div className="w-[17%] lg:w-[17%] bg-teal-500 flex items-center justify-center p-0">
+                     <RightCol />
                 </div>
             </div>
 
