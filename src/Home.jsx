@@ -30,7 +30,7 @@ function Home() {
             {/* Section 5: 50% - Divided into 3 horizontal parts */}
             <div className="h-[70%] w-full flex flex-row">
                 {/* Section 5.1: Left - Blue */}
-                <div className="w-[18%] lg:w-[18%] bg-blue-500 flex items-center justify-center p-0">
+                <div className="w-[20%] lg:w-[20%] bg-blue-500 flex items-center justify-center p-0">
                    <Leftcol />
                 </div>
 
@@ -42,7 +42,7 @@ function Home() {
                 </div>
 
                 {/* Section 5.3: Right - Teal */}
-                <div className="w-[17%] lg:w-[17%] bg-teal-500 flex items-center justify-center p-0">
+                <div className="w-[15%] lg:w-[15%] bg-teal-500 flex items-center justify-center p-0">
                      <RightCol />
                 </div>
             </div>
