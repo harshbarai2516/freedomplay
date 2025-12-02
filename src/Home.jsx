@@ -36,9 +36,7 @@ function Home() {
 
                 {/* Section 5.2: 60% - Center - Purple */}
                     <div className="w-[65%] lg:w-[65%] bg-purple-600 flex items-stretch justify-center overflow-hidden">
-                    <div className="w-full h-full">
                         <NumberGrid />
-                    </div>
                 </div>
 
                 {/* Section 5.3: Right - Teal */}
