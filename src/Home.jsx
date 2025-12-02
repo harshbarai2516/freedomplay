@@ -5,7 +5,7 @@ import RightCol from './Rightcol.jsx';
 
 function Home() {
     return (
-         <div className="h-portrait-60 h-landscape-full flex flex-col w-full">
+        <div className="h-portrait-60 h-landscape-full flex flex-col w-full">
 
             {/* Section 1: 15% - Blue */}
             <div className="h-[7%] w-full bg-blue-600 flex items-center justify-center p-4">
@@ -28,20 +28,20 @@ function Home() {
             </div>
 
             {/* Section 5: 50% - Divided into 3 horizontal parts */}
-            <div className="h-[70%] w-full flex flex-row">
+            <div className="h-[100%] w-full flex flex-row">
                 {/* Section 5.1: Left - Blue */}
                 <div className="w-[20%] lg:w-[20%] bg-blue-500 flex items-center justify-center p-0">
-                   <Leftcol />
+                    <Leftcol />
                 </div>
 
                 {/* Section 5.2: 60% - Center - Purple */}
-                    <div className="w-[65%] lg:w-[65%] bg-purple-600 flex items-stretch justify-center overflow-hidden">
-                        <NumberGrid />
+                <div className="w-[65%] lg:w-[65%] bg-purple-600 overflow-hidden ">
+                    <NumberGrid />
                 </div>
 
                 {/* Section 5.3: Right - Teal */}
                 <div className="w-[15%] lg:w-[15%] bg-teal-500 flex items-center justify-center p-0">
-                     <RightCol />
+                    <RightCol />
                 </div>
             </div>
 
