@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import Result from './Result.jsx';
+import Notification from './Notification.jsx';
+import Filter from './Filter.jsx';
 import NumberGrid from './Numbergrid.jsx';
 import Leftcol from './Leftcol.jsx';
 import RightCol from './Rightcol.jsx';
@@ -8,13 +11,13 @@ function Home() {
         <div className="h-portrait-60 h-landscape-full flex flex-col w-full">
 
             {/* Section 1: 15% - Blue */}
-            <div className="h-[7%] w-full bg-blue-600 flex items-center justify-center p-4">
-                <span className="text-white font-bold text-sm lg:text-lg text-center">Section 1 (7%)</span>
+            <div className="h-[7%] w-full bg-blue-600 flex items-center justify-center p-0">
+                 <Result />
             </div>
 
             {/* Section 2: 5% - Red */}
-            <div className="h-[4%] w-full bg-red-600 flex items-center justify-center p-4">
-                <span className="text-white font-bold text-xs lg:text-base text-center">Section 2 (4%)</span>
+            <div className="h-[4%] w-full bg-red-600 flex items-center justify-center p-0">
+                <Notification />
             </div>
 
             {/* Section 3: 10% - Green */}
@@ -23,8 +26,8 @@ function Home() {
             </div>
 
             {/* Section 4: 10% - Yellow */}
-            <div className="h-[6%] w-full bg-yellow-500 flex items-center justify-center p-4">
-                <span className="text-white font-bold text-xs lg:text-base text-center">Section 4 (6%)</span>
+            <div className="h-[6%] w-full bg-yellow-500 flex items-center justify-center p-0">
+                <Filter />
             </div>
 
             {/* Section 5: 50% - Divided into 3 horizontal parts */}
