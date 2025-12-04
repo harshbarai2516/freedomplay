@@ -68,7 +68,7 @@ body {
 
 @media screen and (min-resolution: 1dppx) {
   html, body {
-    zoom: 1;
+    zoom: 0;
   }
 }
 
@@ -684,5 +684,59 @@ gap: 0 !important;
   .nav10-container .w-100 {
     min-height: 15px !important;
     max-height: 18px !important;
+  }
+}
+
+/* MOBILE PORTRAIT VIEW FIX (width ≤ 991px + portrait mode) */
+@media (max-width: 991px) and (orientation: portrait) {
+
+  /* Main Nav10 container */
+  .nav10-container {
+    padding: 0.1rem !important;
+    margin: 0 !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    border-bottom: none !important;
+  }
+
+  /* Buttons sizing */
+  .nav10-container button {
+    padding: 0.1rem !important;
+    height: 20px !important;
+    font-size: 0.40rem !important;
+    margin-top: -15px !important;
+    
+  }
+
+  /* Input sizing */
+  .nav10-container input {
+    height: 20px !important;
+    padding: 0 !important;
+    font-size: 0.40rem !important;
+    margin-top: -15px !important;
+  }
+
+  /* Flex changes for tiny screens */
+  .nav10-container .d-flex {
+    gap: 0 !important;
+  }
+
+  /* Password Modal font + padding adjustments */
+  #changePasswordModal .modal-content {
+    width: 95% !important;
+    margin: auto;
+  }
+
+  #changePasswordModal input {
+    font-size: 0.8rem !important;
+    padding: 0.3rem !important;
+  }
+
+  #changePasswordModal .modal-title {
+    font-size: 0.9rem !important;
+  }
+
+  #changePasswordModal button {
+    font-size: 0.8rem !important;
   }
 }
