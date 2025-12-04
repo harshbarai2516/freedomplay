@@ -115,24 +115,69 @@ const Nav3 = ({ setNextSlot }) => {
   }, [setNextSlot]);
 
   return (
-    <div className="container-fluid fw-bold" id="nav3">
-      <div className="row gy-2">
-        <div className="col-12 col-md bg-dark text-light py-1 text-center">
+    <div className="container-fluid fw-bold responsive-container">
+      <div
+        className="d-flex flex-nowrap align-items-center justify-content-between text-center"
+        style={{
+          overflowX: "auto",
+          minHeight: "30px",
+          width: "100%",
+          gap: "0.1rem",
+        }}
+      >
+        <div className="bg-dark text-light flex-grow-1 flex-shrink-0 responsive-text">
           {currentDate || "Loading..."}
         </div>
-        <div className="col-12 col-md bg-dark text-light py-1 mx-1 text-center">
-          Current Time: {currentTime || "Loading..."}
+
+        <div className="bg-dark text-light flex-grow-1 flex-shrink-0 responsive-text">
+          <span className="d-none d-sm-inline">Current Time: </span>
+          <span className="d-inline d-sm-none">Time: </span>
+          {currentTime || "Loading..."}
         </div>
-        <div className="col-12 col-md bg-dark text-light py-1 me-1 text-center">
-          Time Slot: {nextSlot}
+
+        <div className="bg-dark text-light flex-grow-1 flex-shrink-0 responsive-text">
+          <span className="d-none d-sm-inline">Time Slot: </span>
+          <span className="d-inline d-sm-none">Slot: </span>
+          {nextSlot}
         </div>
-        <div className="col-12 col-md bg-dark text-light py-1 text-center">
-          Remaining Time: {remainingTime || "Loading..."}
+
+        <div className="bg-dark text-light flex-grow-1 flex-shrink-0 responsive-text">
+          <span className="d-none d-sm-inline">Remaining: </span>
+          <span className="d-inline d-sm-none">Time: </span>
+          {remainingTime || "Loading..."}
         </div>
       </div>
+
+      <style>{`
+        /* Default font size for mobile portrait */
+        .responsive-text {
+          font-size: clamp(0.5rem, 1.2vw, 0.9rem);
+          padding: 0.2rem 0.3rem;
+          margin-top: -8px !important;
+        }
+
+        /* Desktop & large screens */
+        @media (min-width: 992px) {
+          .responsive-text {
+            font-size: clamp(0.85rem, 1.5vw, 1.2rem);
+          }
+        }
+
+        /* Mobile landscape: remove padding/margin & adjust font */
+        @media (max-width: 991px) and (orientation: landscape) {
+          .responsive-container {
+            padding: 0 !important;
+            margin: 0 !important;
+            margin-top: -4px !important;
+          }
+          .responsive-text {
+            font-size: clamp(0.5rem, 0.5vw, 0.5rem);
+            padding: 0 !important;
+          }
+        }
+      `}</style>
     </div>
   );
 };
 
 export default Nav3;
-

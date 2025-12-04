@@ -1,4 +1,4 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import JsBarcode from "jsbarcode";
 import { useNavigate } from "react-router-dom";
@@ -17,16 +17,12 @@ const Nav10 = ({
     JSON.parse(localStorage.getItem("token"))?.username ||
     "User";
 
-   const navigate = useNavigate();
-
-  // ⭐ Password States
+  // Password States
   const [currentPass, setCurrentPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [confirmPass, setConfirmPass] = useState("");
+  const navigate = useNavigate();
 
-  // ================================================
-  // ⭐ CHANGE PASSWORD FUNCTION (AXIOS FINAL)
-  // ================================================
   const updatePassword = async () => {
     if (!currentPass || !newPass || !confirmPass) {
       alert("⚠️ Please fill all fields.");
@@ -55,13 +51,10 @@ const Nav10 = ({
         }
       );
 
-      const data = response.data;
-      console.log(data);
-
-      if (data.status === true) {
+      if (response.data.status === true) {
         alert("✅ Password Updated Successfully!");
       } else {
-        alert("❌ " + data.message);
+        alert("❌ " + response.data.message);
       }
     } catch (err) {
       console.error(err);
@@ -69,9 +62,35 @@ const Nav10 = ({
     }
   };
 
-  // ================================================
-  // ⭐ BUY FUNCTION
-  // ================================================
+  // TIME → HH:MM:SS converter
+  const to24HourTime = (timeStr) => {
+    if (!timeStr) return "00:00:00";
+
+    timeStr = timeStr
+      .replaceAll(".", ":")
+      .replaceAll("-", ":")
+      .replaceAll(" ", "")
+      .toLowerCase();
+
+    const match = timeStr.match(/(\d{1,2}):(\d{1,2})/);
+    if (!match) return "00:00:00";
+
+    let hour = parseInt(match[1]);
+    let minute = parseInt(match[2]);
+
+    const isPM = timeStr.includes("pm");
+    const isAM = timeStr.includes("am");
+
+    if (isPM && hour < 12) hour += 12;
+    if (isAM && hour === 12) hour = 0;
+
+    hour = String(hour).padStart(2, "0");
+    minute = String(minute).padStart(2, "0");
+
+    return `${hour}:${minute}:00`;
+  };
+
+  // BUY
   const handleBuy = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -92,6 +111,7 @@ const Nav10 = ({
 
       clearDisplayList();
 
+      // Generate all Tickets
       const expandedTickets = [];
       displayList.forEach((item) => {
         selectedZones.forEach((zone) => {
@@ -102,66 +122,99 @@ const Nav10 = ({
       });
 
       const ticketList = expandedTickets.join(",");
-      const drawsToSend = advancedDraws.length > 0 ? advancedDraws : [nextSlot];
-      const perDrawAmount = Number(totalAmount) / drawsToSend.length;
-      const perDrawQty = perDrawAmount;
 
-      const requests = drawsToSend.map((drawTime) =>
-        axios
-          .post(
-            "https://thewonder.uk/royalgame/api/insert_record",
-            {
-              qty: perDrawQty,
-              amt: perDrawAmount,
-              nxt_draw: drawTime,
-              tck_result: ticketList,
+      // ⭐ QTY and AMOUNT EXACT LOGIC
+      const qty = expandedTickets.length;
+      const rate = Number(displayList[0].rate);
+      const amt = qty * rate;
+
+      // Draw array
+      const rawDraws = advancedDraws.length > 0 ? advancedDraws : [nextSlot];
+      const is_advance_bet = advancedDraws.length > 0 ? "1" : "0";
+
+      // nxt_draw → 24hr format ONLY
+      const drawsToSend = rawDraws.map((t) => to24HourTime(t));
+
+      // Barcode
+      const generateBarcode = () => {
+        const now = new Date();
+        const yy = String(now.getFullYear()).slice(2);
+        const mm = String(now.getMonth() + 1).padStart(2, "0");
+        const dd = String(now.getDate()).padStart(2, "0");
+        const rand4 = String(Math.floor(1000 + Math.random() * 9000));
+        return `${yy}${mm}${dd}${rand4}`;
+      };
+
+      const record_date = new Date().toISOString().slice(0, 10);
+
+      const formatTimeHHMMSS = (date) => {
+        const hh = String(date.getHours()).padStart(2, "0");
+        const mm = String(date.getMinutes()).padStart(2, "0");
+        const ss = String(date.getSeconds()).padStart(2, "0");
+        return `${hh}:${mm}:${ss}`;
+      };
+
+      const tck_time = formatTimeHHMMSS(new Date());
+
+      // API CALL
+      const requests = drawsToSend.map((drawTime, index) => {
+        const barcode = generateBarcode();
+
+        const payload = {
+          username: username,
+          qty: String(qty), // ⭐ 43
+          amt: String(amt), // ⭐ 430
+          nxt_draw: drawTime,            // 24hr
+          draw_time: rawDraws[index],    // original
+          barcode: barcode,
+          tck_result: ticketList,
+          tck_time: tck_time,
+          record_date: record_date,
+          is_advance_bet: is_advance_bet,
+        };
+
+        return axios
+          .post("https://freedomplay.us/api/record/insert", payload, {
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${bearer}`,
             },
-            {
-              headers: {
-                "Content-Type": "application/json",
-                Authorization: `Bearer ${bearer}`,
-              },
-            }
-          )
-          .then((res) => {
-            const barcode = res.data?.data?.barcode;
-            if (!barcode) {
-              alert("❌ Barcode not received from API.");
-              return;
-            }
-
+          })
+          .then(() => {
             printTicket({
               barcode,
-              drawTime,
-              perDrawAmount,
-              perDrawQty,
+              drawTime: rawDraws[index],
+              perDrawAmount: amt,
+              perDrawQty: qty,
               ticketList,
             });
 
-            return { drawTime, error: false };
+            return { error: false };
           })
-          .catch(() => ({ drawTime, error: true }))
-      );
+          .catch((err) => {
+            console.error("Insert error:", err?.response || err);
+            return { error: true };
+          });
+      });
 
       const results = await Promise.all(requests);
-      const successCount = results.filter((r) => !r.error).length;
-      const failCount = results.length - successCount;
+      const success = results.filter((r) => !r.error).length;
+      const failed = results.length - success;
 
       alert(
-        `✅ ${successCount} draw(s) inserted successfully${
-          failCount > 0 ? `\n❌ ${failCount} failed` : ""
+        `✅ ${success} draw(s) inserted successfully ${
+          failed > 0 ? `\n❌ ${failed} failed` : ""
         }`
       );
 
       window.location.reload();
     } catch (err) {
+      console.error(err);
       alert("Something went wrong while placing bets.");
     }
   };
 
-  // ================================================
-  // ⭐ PRINT FUNCTION
-  // ================================================
+  // PRINT
   const printTicket = ({
     barcode,
     drawTime,
@@ -186,17 +239,16 @@ const Nav10 = ({
     });
 
     const half = Math.ceil(formattedTickets.length / 2);
-    const leftCol = formattedTickets.slice(0, half);
-    const rightCol = formattedTickets.slice(half);
+    const left = formattedTickets.slice(0, half);
+    const right = formattedTickets.slice(half);
 
     let ticketHtml = `<table style="font-size:14px; width:100%;">`;
     for (let i = 0; i < half; i++) {
       ticketHtml += `
         <tr>
-          <td style="padding-right:40px;">${leftCol[i] || ""}</td>
-          <td>${rightCol[i] || ""}</td>
-        </tr>
-      `;
+          <td style="padding-right:40px;">${left[i] || ""}</td>
+          <td>${right[i] || ""}</td>
+        </tr>`;
     }
     ticketHtml += "</table>";
 
@@ -208,6 +260,7 @@ const Nav10 = ({
       displayValue: true,
       margin: 0,
     });
+
     const barcodeSvg = svg.outerHTML;
 
     printWindow.document.write(`
@@ -242,7 +295,7 @@ const Nav10 = ({
             window.onload = () => {
               window.print();
               setTimeout(() => window.close(), 500);
-            }
+            };
           </script>
         </body>
       </html>
@@ -251,43 +304,83 @@ const Nav10 = ({
     printWindow.document.close();
   };
 
-  // =================================================
-  // ⭐ RENDER UI
-  // =================================================
+  // UI (UNCHANGED)
   return (
-    <div className="container-fluid text-center py-2 border border-dark rounded-0 mb-5">
-      <div className="row gy-2 gx-2">
-        <div className="col-6 col-md">
+    <div
+      className="fw-bold nav10-container"
+      style={{
+        padding: "0.1rem 0.5rem",
+        overflowX: "auto",
+        minHeight: "32px",
+        width: "100%",
+        borderTop: "1px solid #ccc",
+        borderBottom: "1px solid #ccc",
+        marginBottom: "0.5rem",
+      }}
+    >
+      <div
+        className="d-flex flex-nowrap align-items-center"
+        style={{ gap: 0, minWidth: "fit-content", width: "100%" }}
+      >
+        <div style={{ flex: "1 1 0", minWidth: 0, paddingRight: "0.1rem" }}>
           <button
             className="btn btn-primary w-100 fw-bold"
             data-bs-toggle="modal"
             data-bs-target="#changePasswordModal"
+            style={{
+               padding: "0.15rem 0.2rem",
+               height: "clamp(28px, 2vw, 36px)",
+               background: "linear-gradient(to right, #007bff, #0056b3)",
+               color: "white"
+             }}
           >
-            Change Password
+            CHANGE PASSWORD
           </button>
         </div>
 
-        <div className="col-6 col-md">
-          <button className="btn btn-success w-100 fw-bold" onClick={() => navigate('/twod')}>2D</button>
+        <div style={{ flex: "1 1 0", minWidth: 0, paddingRight: "0.1rem" }}>
+          <button
+            className="btn btn-success w-100 fw-bold"
+            style={{
+               padding: "0.15rem 0.2rem",
+               height: "clamp(28px, 2vw, 36px)",
+               background: "linear-gradient(to right, #28a745, #1e7e34)",
+               color: "white"
+             }}
+             onClick={() => navigate('/twoD')}
+          >
+            2D
+          </button>
         </div>
 
-        <div className="col-6 col-md">
+        <div style={{ flex: "1 1 0", minWidth: 0, paddingRight: "0.1rem" }}>
           <input
             type="text"
             value={totalAmount}
             readOnly
             className="form-control text-center fw-bold"
+            style={{
+               padding: "0.15rem 0.2rem",
+               height: "clamp(28px, 2vw, 36px)",
+             }}
           />
         </div>
 
-        <div className="col-6 col-md">
-          <button className="btn btn-dark w-100 fw-bold" onClick={handleBuy}>
+        <div style={{ flex: "1 1 0", minWidth: 0 }}>
+          <button
+            className="btn btn-dark w-100 fw-bold"
+            onClick={handleBuy}
+            style={{
+               padding: "0.15rem 0.2rem",
+               height: "clamp(28px, 2vw, 36px)",
+             }}
+          >
             BUY-F6
           </button>
         </div>
       </div>
 
-      {/* ================== CHANGE PASSWORD MODAL ================== */}
+      {/* PASSWORD MODAL */}
       <div
         className="modal fade"
         id="changePasswordModal"
@@ -305,8 +398,7 @@ const Nav10 = ({
             <div
               className="modal-header text-white p-3"
               style={{
-                background:
-                  "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
               }}
             >
               <h6 className="modal-title fw-bold">🔑 Change Password</h6>
@@ -359,3 +451,4 @@ const Nav10 = ({
 };
 
 export default Nav10;
+
