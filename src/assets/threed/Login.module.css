@@ -1,0 +1,94 @@
+.mainContainer {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main form box */
+.container {
+  background-color: #000;
+  width: 40%;
+  padding: 3rem;
+  border-radius: 20px;
+  box-shadow: 0 0 25px rgba(128, 0, 128, 0.5);
+}
+
+/* Form itself */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Input fields */
+.inputField {
+  background-color: #111;
+  color: #fff;
+  border: 3px solid #6c757d;
+  border-radius: 10px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  padding: 0.8rem 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.inputField:focus {
+  border-color: purple;
+  box-shadow: 0 0 8px purple;
+}
+
+/* Login Button */
+.loginBtn {
+  background-color: purple;
+  border: none;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: bold;
+  padding: 0.9rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.loginBtn:hover {
+  background-color: rgb(120, 0, 120);
+  transform: scale(1.03);
+}
+
+/* ============ RESPONSIVE DESIGN ============ */
+
+/* Tablets (768px and below) */
+@media (max-width: 992px) {
+  .container {
+    width: 60%;
+    padding: 2rem;
+  }
+
+  .inputField {
+    font-size: 1.1rem;
+  }
+
+  .loginBtn {
+    font-size: 1.2rem;
+  }
+}
+
+/* Mobile phones (up to 576px) */
+@media (max-width: 576px) {
+  .container {
+    width: 90%;
+    padding: 1.5rem;
+  }
+
+  .inputField {
+    font-size: 1rem;
+    padding: 0.7rem;
+  }
+
+  .loginBtn {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+}

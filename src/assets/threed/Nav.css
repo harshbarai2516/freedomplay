@@ -1,0 +1,667 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* overflow: hidden; */
+  background-color: #f8f9fa;
+}
+
+#colo {
+  background-color: rgb(10, 85, 87);
+}
+
+#colo1 {
+  background-color: rgb(226, 43, 150);
+}
+
+#colo2 {
+  background-color: blue;
+}
+
+#colo3 {
+  background-color: red;
+}
+
+#cl {
+  background: linear-gradient(to top, rgb(0, 100, 128), rgb(0, 60, 90));
+}
+
+/* #cl1 {
+  background-color: rgb(12, 60, 73);
+} */
+
+#bco {
+  background: linear-gradient(to top, rgb(209, 152, 198), rgb(180, 70, 160));
+}
+
+.box {
+  border: 1px solid black;
+}
+
+/* Font rendering for smoothness */
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Hide scrollbars visually but keep layout size identical */
+::-webkit-scrollbar {
+  width: 0 !important;
+  height: 0 !important;
+}
+html {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+body {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+@media screen and (min-resolution: 1dppx) {
+  html, body {
+    zoom: 1;
+  }
+}
+
+/* Scrolling text */
+.scroll-container {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  background: #000;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px 0;
+  position: relative;
+}
+
+.scroll-text {
+  display: inline-block;
+  padding-left: 100%;
+  animation: scroll-left 25s linear infinite;
+  font-size: auto;
+}
+
+@keyframes scroll-left {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Default: Desktop & Big Screen */
+.nav-responsive {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* Tablet (medium screen) */
+@media (max-width: 992px) {
+  .nav-responsive {
+    font-size: 10px !important;
+    font-weight: bold;
+  }
+}
+
+/* Mobile Landscape */
+@media (max-width: 768px) and (orientation: landscape) {
+  .nav-responsive {
+    font-size: 8px !important;
+    font-weight: normal;
+  }
+}
+
+/* Mobile Portrait */
+@media (max-width: 600px) and (orientation: portrait) {
+  .nav-responsive {
+    font-size: 5px !important;
+    font-weight: normal;
+  }
+}
+
+/* ⭐ Default → Mobile Small */
+.custom-font {
+  font-size: 5px;     /* Mobile Portrait */
+  font-weight: 800;
+  text-align: center;
+  white-space: nowrap;
+}
+
+/* ⭐ Mobile Landscape (width ≥ 576px) */
+@media (min-width: 576px) {
+  .custom-font {
+    font-size: 13px;
+  }
+}
+
+/* ⭐ Tablet (width ≥ 768px) */
+@media (min-width: 768px) {
+  .custom-font {
+    font-size: 10px;
+    font-weight: 700;
+  }
+}
+
+/* ⭐ Laptop / Desktop (width ≥ 992px) → BIG FONT */
+@media (min-width: 992px) {
+  .custom-font {
+    font-size: 20px;     /* BIG */
+    font-weight: 700;    /* BOLD */
+  }
+}
+
+/* ⭐ Large Desktop (width ≥ 1200px) → MORE BIG FONT */
+@media (min-width: 1200px) {
+  .custom-font {
+    font-size: 20px;     /* BIGGER */
+    font-weight: 700;    /* MORE BOLD */
+  }
+}
+
+/* ------------------- FONT SIZE CONTROL ------------------- */
+
+/* 📱 Mobile (portrait + landscape) */
+.nav4-font {
+  font-size: 8px !important;
+}
+
+/* 📲 Tablet */
+@media (min-width: 576px) {
+  .nav4-font {
+    font-size: 8px !important;
+  }
+}
+
+/* 💻 Desktop */
+@media (min-width: 992px) {
+  .nav4-font {
+    font-size: 200px !important;
+    font-weight: 800 !important;
+  }
+}
+
+/* 🖥 Large Desktop */
+@media (min-width: 1400px) {
+  .nav4-font {
+    font-size: 24px !important;
+    font-weight: 900 !important;
+  }
+}
+
+/* BUTTON FONT */
+.nav4-btn {
+  font-size: 5px;
+  padding: 4px 6px;
+}
+
+@media (min-width: 992px) {
+  .nav4-btn {
+    font-size: 14px;
+    font-weight: 700;
+  }
+}
+
+@media (min-width: 1400px) {
+  .nav4-btn {
+    font-size: 16px;
+    font-weight: 800;
+  }
+}
+
+/* Default → Mobile + Tablet → Small font */
+.nav10-font {
+  font-size: 0.5rem !important;
+  font-weight: 700 !important;
+}
+
+/* Desktop → Big Bold Font */
+@media (min-width: 992px) {
+  .nav10-font {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+  }
+}
+
+/* Large Desktop → Bigger Bold Font */
+@media (min-width: 1200px) {
+  .nav10-font {
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    height: auto !important;
+  }
+}
+/* Default → Mobile + Tablet → Small font */
+.nav8-font {
+  font-size: 0.3rem !important;
+  font-weight: 600 !important;
+}
+
+/* Desktop → Big Bold */
+@media (min-width: 992px) {
+  .nav8-font {
+    font-size: 1rem !important;
+    font-weight: 600 !important;
+    height: auto !important;
+  }
+}
+
+/* Large Desktop → Bigger Bold */
+@media (min-width: 1200px) {
+  .nav8-font {
+    font-size: 1.15rem !important;
+    font-weight: 600 !important;
+    height: auto !important;
+  }
+}
+
+/* LARGE FONT ON DESKTOP */
+@media (min-width: 992px) {
+  .desktop-big-font {
+    font-size: 1rem !important;
+    font-weight: 700 !important;
+  }
+}
+
+/* FULL-WIDTH BUTTONS ON DESKTOP + LANDSCAPE */
+@media (min-width: 992px),
+       (max-height: 480px) and (orientation: landscape) {
+  .full-width-desktop {
+    width: 100% !important;
+  }
+}
+
+/* ****************Nav*********************** */
+
+/* Nav.css */
+
+/* Default: Desktop / tablet / mobile portrait */
+.nav-responsive .fw-bold {
+  font-size: clamp(0.8rem, 1.2vw, 1.2rem);
+  padding: 0.5rem 1rem;
+  margin: 0.2rem;
+}
+
+/* Mobile landscape: width < 992px and landscape orientation */
+@media (max-width: 991px) and (orientation: landscape) {
+  .nav-responsive .fw-bold {
+    font-size: clamp(0.3rem, 0.3vw, 0.3rem); /* slightly smaller but readable */
+    padding: 0 !important;  /* remove padding */
+    margin: 0 !important;   /* remove margin */
+  }
+}
+
+/* Optional: For smaller phones portrait */
+@media (max-width: 575px) {
+  .nav-responsive .fw-bold {
+    font-size: clamp(0.6rem, 1.5vw, 0.9rem);
+     padding: 6px !important;  /* remove padding */
+    margin: 0 !important;   /* remove margin */
+  }
+}
+/* ***********************Nav2.jsx************************ */
+
+/* Nav.css */
+/* Default styling */
+.scroll-container {
+  overflow: hidden;
+  width: 100%;
+  padding: 0.5rem 1rem; /* desktop/portrait */
+  margin: 0;
+  background-color: #000;
+}
+
+.scroll-text {
+  white-space: nowrap;
+  display: inline-block;
+  font-size: 1rem; /* desktop font */
+  color: #fff;
+}
+
+/* ⭐ MOBILE LANDSCAPE ONLY */
+@media (max-width: 991px) and (orientation: landscape) {
+  .scroll-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 10px !important;
+
+    display: flex !important;
+    justify-content: center !important;  /* horizontal center */
+    align-items: center !important;      /* vertical center */
+    text-align: center !important;       /* center text alignment */
+  }
+
+  .scroll-text {
+    font-size: 0.4rem !important;
+    line-height: normal !important;
+  }
+}
+@media (max-width: 991px) and (orientation: portrait) {
+  
+   .scroll-text {
+    font-size: 0.7rem !important;
+    height: 5px !important;
+  }
+}
+
+/* **************************Nav4******************************** */
+
+/* Remove padding and margin for mobile landscape */
+@media (max-width: 991px) and (orientation: landscape) {
+  .container-fluid{
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .modal-content,
+  .modal-body,
+  .modal-footer {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .btn {
+    padding: 0 !important;
+    margin: 0 !important;
+    font-size: 5px !important;
+  }
+
+  #nav4Container {
+    margin-top: -15px !important;
+  }
+}
+/* Mobile portrait: remove side padding/margin and top gap */
+@media (max-width: 991px) and (orientation: portrait) {
+  .container-fluid,
+  .modal-content,
+  .modal-body,
+  .modal-footer,
+  .btn {
+    font-size: 0.26rem !important;
+  }
+  #nav4Container{
+    margin-top: -9px !important;
+  }
+}
+
+
+/* *******************Nav5*************************** */
+
+/* Mobile Landscape (width 576px to 991px) */
+@media (min-width: 576px) and (max-width: 991px) {
+/* Container & flex divs */
+.nav5-container,
+.nav5-container .d-flex {
+padding: 0 !important;
+margin: -13px 0 -9px 0 !important;
+}
+
+.nav5-container .d-flex > div {
+gap: 0 !important;
+margin: 0 !important;
+padding: 0 !important;
+}
+
+/* Checkboxes */
+.nav5-container input[type="checkbox"] {
+width: 8px !important;
+height: 8px !important;
+margin: 0 !important;
+padding: 0 !important;
+}
+
+/* Labels */
+.nav5-container label {
+font-size: 0.5rem !important;
+margin: 0 !important;
+padding: 0 !important;
+line-height: 1 !important;
+}
+
+/* Buttons (ALL, How to Play, Logout, Numbers, Motor, Lucky Pick) */
+.nav5-container button {
+font-size: 0.5rem !important;
+padding: 0 !important;
+margin: 0 !important;
+line-height: 1 !important;
+}
+
+/* Specifically remove spacing for How to Play and Logout buttons */
+.nav5-container button[data-bs-toggle="modal"],
+.nav5-container button.btn-danger {
+padding: 0 !important;
+margin: 0 !important;
+}
+}
+@media (max-width: 991px) and (orientation: portrait){
+  .nav5-container{
+    margin-top: -9px !important;
+  }
+  .nav5-container label {
+font-size: 0.5rem !important;
+margin: 0 !important;
+padding: 0 !important;
+line-height: 1.3 !important;
+}
+.nav5-container button {
+font-size: 0.5rem !important;
+padding: 0 !important;
+margin: 0 !important;
+line-height: 1.3 !important;
+}
+/* Checkboxes */
+.nav5-container input[type="checkbox"] {
+width: 9px !important;
+height: 9px !important;
+margin: 0 !important;
+padding: 0 !important;
+}
+}
+
+
+/* ******************Nav6*************************** */
+/* Mobile Landscape (width 576px to 991px) */
+@media (max-width: 991px) and (min-width: 576px) {
+/* Remove padding and margin for all buttons */
+.nav6-container .d-flex > button,
+.nav6-container .d-flex > div {
+padding: 0 !important;
+margin: 0 !important;
+gap: 0 !important;
+
+}
+
+/* Reduce button text size */
+.nav6-container button {
+font-size: 0.5rem !important;
+padding: 0 !important;
+}
+
+/* Reduce label text size */
+.nav6-container label {
+font-size: 0.5rem !important;
+padding: 0 !important;
+margin: 0 !important;
+}
+
+/* Reduce checkbox size */
+.nav6-container input[type="checkbox"] {
+width: 10px !important;
+height: 10px !important;
+margin: 0 !important;
+}
+
+}
+@media (max-width: 991px) and (orientation: portrait){
+  .nav6-container{
+    margin-top: -9px !important;
+  }
+}
+
+/* ******************Nav7************************************ */
+/* Mobile Landscape (width 576px to 991px) */
+@media (min-width: 576px) and (max-width: 991px) {
+/* Container adjustments */
+.nav7-container {
+padding: 0 !important;
+margin: 0 !important;
+overflow-x: auto !important;
+}
+
+/* Remove gap, padding, margin for checkboxes */
+.nav7-container input[type="checkbox"],
+.nav7-container label {
+margin: 0 !important;
+padding: 0 !important;
+font-size: 0.3rem !important;
+line-height: 1 !important;
+font-weight: 900 !important;
+}
+
+/* Remove padding and margin from Trans-ID input */
+.nav7-container input.form-control {
+padding: 0 !important;
+margin: 0 !important;
+font-size: 0.3rem !important;
+height: auto !important;
+line-height: 1 !important;
+font-weight: 900 !important;
+}
+
+/* Remove gap between flex items */
+.nav7-container .d-flex {
+gap: 0 !important;
+}
+}
+/* *********************Nav8************************************* */
+
+/* ⭐ MOBILE LANDSCAPE ONLY (576px – 991px) */
+@media (min-width: 576px) and (max-width: 991px) {
+
+  /* Remove padding + margin from the whole Nav8 container */
+  #bco {
+    padding: 0 !important;
+    margin: -7px 0 !important;
+    min-height: auto !important;
+    
+  }
+
+  /* Remove padding + margin from all children */
+  #bco * {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Fix text size smaller for landscape */
+  .nav8-font,
+  #bco label,
+  #bco input,
+  #bco select {
+    font-size: 0.4rem !important;
+    line-height: 1 !important;
+  }
+
+  /* Fix input heights */
+  #bco input,
+  #bco select {
+    height: 12px !important;
+  }
+
+  /* Fix radio button size */
+  #bco input[type="radio"] {
+    width: 12px !important;
+    height: 12px !important;
+  }
+}
+/* ******************Nav9*********************************** */
+.nav9-container{
+  padding: 0 !important;
+}
+/* Mobile Portrait (height > width) */
+@media screen and (max-width: 600px) and (orientation: portrait) {
+  .nav9-container {
+    padding: 0 !important;
+  }
+}
+@media (min-width: 576px) and (max-width: 991px) {
+  .nav9-container {
+    margin-top: 7px !important; /* adjust as needed */
+  }
+}
+/* ******************Nav10********************************** */
+/* 📌 Mobile Landscape View Only */
+/* @media screen and (max-width: 991px) and (orientation: landscape) { */
+
+  /* 🔹 Reduce font size */
+  /* .nav10-font {
+    font-size: 8px !important;
+  } */
+
+  /* 🔹 Remove padding & margin from all Nav10 buttons + inputs */
+  /* .nav10-bar button,
+  .nav10-bar input {
+    height: 15px !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    margin-top: -15px !important;
+  } */
+
+  /* 🔹 Remove padding from container */
+  /* .nav10-bar {
+    border-bottom: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+} */
+
+/* 📌 MOBILE LANDSCAPE VIEW (width ≤ 991px + landscape) */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+
+  /* 🔹 Reduce font size of all text inside Nav10 */
+  .nav10-container * {
+    font-size: 8px !important;
+  }
+
+  /* 🔹 Remove padding & margin from all buttons and inputs */
+  .nav10-container button,
+  .nav10-container input {
+    padding: 0 !important;
+    margin: 0 !important;
+    height: 15px !important;
+  }
+
+  /* 🔹 Fix top alignment issue */
+  .nav10-container button,
+  .nav10-container input {
+    margin-top: 1px !important;
+  }
+
+  /* 🔹 Remove padding & spacing from the top bar container */
+  .nav10-container {
+    padding: 0 !important;
+    margin: 0 !important;
+    border-top: none !important;
+    border-bottom: none !important;
+  }
+
+  /* 🔹 Buttons inside flex should have NO extra spacing */
+  .nav10-container .d-flex {
+    gap: 0 !important;
+  }
+
+  /* 🔹 Prevent stretching */
+  .nav10-container .w-100 {
+    min-height: 15px !important;
+    max-height: 18px !important;
+  }
+}

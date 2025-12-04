@@ -18,7 +18,7 @@ export default function RightCol() {
               style={{
                 backgroundColor: col.color,
                 fontSize: "calc(10px + 0.4vw)",
-                height: "calc(20px + 0.5vh)",
+                height: "calc(20px + 1.7vh)",
               }}
             >
               {col.title}
