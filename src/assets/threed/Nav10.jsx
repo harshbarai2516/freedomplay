@@ -360,9 +360,10 @@ const Nav10 = ({
             readOnly
             className="form-control text-center fw-bold"
             style={{
-               padding: "0.15rem 0.2rem",
-               height: "clamp(28px, 2vw, 36px)",
-             }}
+              fontSize: "clamp(0.4rem, 1.2vw, 0.6rem)",
+              padding: "0.15rem 0.2rem",
+              height: "clamp(28px, 2vw, 36px)",
+            }}
           />
         </div>
 

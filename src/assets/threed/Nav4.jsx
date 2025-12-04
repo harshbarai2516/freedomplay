@@ -89,7 +89,7 @@ const Nav4 = ({ onDrawSelect }) => {
 
   return (
     <div
-      className="container-fluid fw-bold py-0 px-0 px-sm-3"
+      className="container-fluid fw-bold py-0 px-0 px-sm-3 nav4-content"
       id="nav4Container"
     >
       <div

@@ -380,17 +380,38 @@ body {
     margin-top: -15px !important;
   }
 }
-/* Mobile portrait: remove side padding/margin and top gap */
 @media (max-width: 991px) and (orientation: portrait) {
-  .container-fluid,
-  .modal-content,
-  .modal-body,
-  .modal-footer,
-  .btn {
-    font-size: 0.26rem !important;
+
+  /* ✅ Reduce inner content only */
+  .nav4-content *:not(.nav4-btn):not(.modal-header *):not(.modal-title) {
+    font-size: 0.3rem !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
-  #nav4Container{
-    margin-top: -9px !important;
+
+  /* ✅ Prevent Nav4 buttons from shrinking */
+  .nav4-btn {
+    font-size: clamp(0.55rem, 0.5vw, 0.75rem) !important;
+    padding: 0.3rem 0.3rem !important;
+    margin: 0 !important;
+  }
+
+  /* Fix unwanted top gap */
+  #nav4Container {
+    margin-top: -12px !important;
+  }
+
+  /* Fix body scrolling issue */
+  .modal-body {
+    max-height: 65vh !important;
+    overflow-y: auto !important;
+  }
+
+  /* Allow buttons inside modal to remain visible */
+  .modal-footer button {
+    font-size: 0.4rem !important;
+    padding: 0.2rem 0.3rem !important;
+    margin: 0 !important;
   }
 }
 
