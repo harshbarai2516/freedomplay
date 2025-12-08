@@ -1,59 +1,127 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
-export default function NumberGrid({ startNumber = 0 }) {
+export default function NumberGrid({
+  startNumber = 0,
+  activeRange,
+  checkedRanges = [],
+  sharedGridData,
+  onSharedUpdate,
+}) {
   const rows = Array.from({ length: 10 }, (_, i) => `F${i}`);
   const cols = Array.from({ length: 10 }, (_, i) => i);
 
-  // Format with 4 digits
-  const getNumber = (rowIndex, colIndex) => {
-    const index = rowIndex * 10 + colIndex;
-    return String(startNumber + index).padStart(4, "0");
+  const [gridValues, setGridValues] = useState(
+    Array.from({ length: 10 }, () => Array(10).fill(""))
+  );
+  const [colValues, setColValues] = useState(Array(10).fill(""));
+  const [rowValues, setRowValues] = useState(Array(10).fill(""));
+
+  const getNumber = (r, c) => String(startNumber + r * 10 + c).padStart(4, "0");
+
+  // Sync values from sharedGridData when switching ranges
+  useEffect(() => {
+    const data = sharedGridData[activeRange];
+    if (data) {
+      setRowValues(data.rows);
+      setColValues(data.cols);
+      setGridValues(data.cells);
+    } else {
+      // Reset to blank if range has no data yet
+      setRowValues(Array(10).fill(""));
+      setColValues(Array(10).fill(""));
+      setGridValues(Array.from({ length: 10 }, () => Array(10).fill("")));
+    }
+  }, [sharedGridData, activeRange]);
+
+
+  const handleColChange = (colIndex, value) => {
+    setColValues((prev) => {
+      const updated = [...prev];
+      updated[colIndex] = value;
+      return updated;
+    });
+    setGridValues((prev) =>
+      prev.map((r) => {
+        const newRow = [...r];
+        newRow[colIndex] = value;
+        return newRow;
+      })
+    );
+    onSharedUpdate(activeRange, "col", colIndex, value);
+  };
+
+  const handleRowChange = (rowIndex, value) => {
+    setRowValues((prev) => {
+      const updated = [...prev];
+      updated[rowIndex] = value;
+      return updated;
+    });
+    setGridValues((prev) => {
+      const updated = [...prev];
+      updated[rowIndex] = Array(10).fill(value);
+      return updated;
+    });
+    onSharedUpdate(activeRange, "row", rowIndex, value);
+  };
+
+  const handleCellChange = (r, c, value) => {
+    setGridValues((prev) => {
+      const updated = prev.map((row) => [...row]);
+      updated[r][c] = value;
+      return updated;
+    });
   };
 
   return (
     <div className="w-full h-full flex items-center justify-center overflow-hidden">
       <div className="w-full h-full bg-white flex flex-col">
-        {/* Header */}
-        <div className="grid grid-cols-11 bg-gray-200 text-gray-800 font-semibold text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm">
-          <div className="border-r border-gray-300 flex items-center justify-center">
+        {/* Header Row */}
+        <div className="grid grid-cols-11 bg-gray-200 text-gray-800 font-semibold text-[0.5rem]">
+          <div className="border-r border-gray-300 flex items-center justify-center portrait:text-[0.4rem]">
             BLOCK
           </div>
-          {cols.map((col) => (
+          {cols.map((colIndex) => (
             <div
-              key={col}
-              className="border-r border-gray-300 flex flex-col items-center justify-center"
+              key={colIndex}
+              className="border-r border-gray-300 flex flex-col items-center"
             >
-              <div>{`B${col}`}</div>
+              <div  className="text-[0.6rem] font-bold portrait:text-[0.4rem]">{`B${colIndex}`}</div>
               <input
                 type="text"
-                className="w-4 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-black text-center text-[0.6rem] font-semibold"
+                value={colValues[colIndex]}
+                onChange={(e) => handleColChange(colIndex, e.target.value)}
+                className="w-10 h-5 border-1 border-black text-center text-[0.6rem] portrait:w-[4.5vw] portrait:h-[3.2vw]"
               />
             </div>
           ))}
         </div>
 
-        {/* Body */}
+        {/* Grid Body */}
         {rows.map((rowLabel, rowIndex) => (
           <div key={rowIndex} className="grid grid-cols-11 border-t border-gray-300 flex-1">
-            <div className="bg-gray-200 border-r border-gray-300 flex flex-col items-center justify-center font-semibold text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm">
-              <div>{rowLabel}</div>
+            <div className="bg-gray-200 border-r border-gray-300 flex flex-col items-center justify-center">
+              <div className="text-[0.6rem] font-bold portrait:text-[0.4rem]">{rowLabel}</div>
               <input
                 type="text"
-                className="w-4 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-black text-center text-[0.6rem] font-semibold"
+                value={rowValues[rowIndex]}
+                onChange={(e) => handleRowChange(rowIndex, e.target.value)}
+                className="w-10 h-5 border-1 border-black text-center text-[0.6rem]  portrait:w-[4.5vw] portrait:h-[3.2vw]"
               />
             </div>
 
-            {cols.map((_, colIndex) => (
+            {cols.map((colIndex) => (
               <div
                 key={colIndex}
                 className="border-r border-gray-300 flex flex-col items-center justify-center"
               >
-                <div className="text-[0.5rem] sm:text-[0.6rem] md:text-xs lg:text-sm font-bold text-gray-800">
+                <div className="text-[0.6rem] font-bold text-gray-800 portrait:text-[0.4rem]">
                   {getNumber(rowIndex, colIndex)}
                 </div>
                 <input
                   type="text"
-                  className="w-4 sm:w-10 md:w-12 h-3 sm:h-4 md:h-5 border-2 border-black text-center text-[0.6rem] font-semibold"
+                  value={gridValues[rowIndex][colIndex]}
+                  onChange={(e) => handleCellChange(rowIndex, colIndex, e.target.value)}
+                  className="w-10 h-5 border-1 border-black text-center text-[0.6rem] portrait:w-[4.5vw] portrait:h-[3.2vw]"
                 />
               </div>
             ))}
@@ -63,4 +131,3 @@ export default function NumberGrid({ startNumber = 0 }) {
     </div>
   );
 }
-

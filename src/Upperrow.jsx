@@ -76,64 +76,71 @@ export default function UpperRow() {
     timeString?.replace(/:\d{2}(?=\s*(AM|PM|am|pm))/i, "") || "";
 
   return (
-    <div className="w-full h-full bg-gray-100 p-1 flex flex-col justify-center">
+    <div className="w-full bg-gray-100 px-1 py-0.5">
       {/* Popup Notification */}
       {popup && (
-        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 text-white px-6 py-3 rounded-lg text-base sm:text-lg font-semibold z-50 shadow-lg text-center max-w-[90vw]">
+        <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-900 text-white px-4 py-2 rounded-lg text-sm font-semibold z-50 shadow-lg text-center max-w-[90vw]">
           {popup}
         </div>
       )}
 
-      {/* Upper Row */}
-      <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-1 sm:gap-2 w-full h-full">
+      {/* Main Container - Single Row with Wrap */}
+      <div
+        className="
+    flex flex-nowrap items-center justify-between w-full 
+    gap-[0.4vw] px-[0.5vw] py-[0.3vw] overflow-hidden 
+    portrait:gap-[0.2vw] portrait:scale-[1]
+  "
+      >
         {/* CT (Current Time) */}
-        <div className="flex items-center justify-center bg-yellow-300 border border-black rounded-xl px-2 py-1 flex-1 min-w-[60px]">
-          <span className="bg-black text-white text-xs sm:text-sm font-bold rounded px-1 mr-1">
+        <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.6vw] py-[0.3vw]">
+          <span className="bg-black text-white text-[0.8vw] font-bold rounded px-[0.3vw] mr-[0.3vw] portrait:text-[2.2vw]">
             CT
           </span>
-          <span className="text-xs sm:text-sm font-bold">
-            {timeData?.currentTime12 || "Loading..."}
+          <span className="text-[0.8vw] font-bold truncate portrait:text-[2.2vw]">
+            {timeData?.currentTime12?.slice(0, 8) || "Loading"}
           </span>
         </div>
 
         {/* CS (Close Time) */}
-        <div className="flex items-center justify-center bg-yellow-300 border border-black rounded-xl px-2 py-1 flex-1 min-w-[60px]">
-          <span className="bg-black text-white text-xs sm:text-sm font-bold rounded px-1 mr-1">
+        <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.6vw] py-[0.3vw]">
+          <span className="bg-black text-white text-[0.8vw] font-bold rounded px-[0.3vw] mr-[0.3vw] portrait:text-[2.2vw]">
             CS
           </span>
-          <span className="text-xs sm:text-sm font-bold">
-            {formatTimeWithoutSeconds(timeData?.drawTime) || "Loading..."}
+          <span className="text-[0.8vw] font-bold truncate portrait:text-[2.2vw]">
+            {formatTimeWithoutSeconds(timeData?.drawTime)?.slice(0, 8) || "Loading"}
           </span>
         </div>
 
         {/* RT (Remaining Time) */}
-        <div className="flex items-center justify-center bg-yellow-300 border border-black rounded-xl px-2 py-1 flex-1 min-w-[60px]">
-          <span className="text-sm sm:text-base font-extrabold text-gray-900">
-            {timeData?.remainingTime || "00:00"}
+        <div className="flex-shrink-0 flex items-center justify-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw]">
+          <span className="text-[0.9vw] font-extrabold text-gray-900 portrait:text-[2.4vw]">
+            {timeData?.remainingTime?.slice(0, 5) || "00:00"}
           </span>
-          <span className="ml-1 text-xs sm:text-sm font-semibold">RT</span>
+          <span className="ml-[0.3vw] text-[0.8vw] font-semibold portrait:text-[2.2vw]">RT</span>
         </div>
 
         {/* Static Buttons */}
         {["RESULT", "ACCOUNT", "REPRINT", "CANCEL", "REFRESH"].map((label) => (
           <button
             key={label}
-            className="flex-1 min-w-[70px] bg-lime-400 border border-black rounded-xl text-xs sm:text-sm font-bold py-1 hover:brightness-105 active:brightness-90 transition"
+            className="flex-shrink-0 bg-lime-400 border border-black rounded-lg font-bold 
+      px-[0.8vw] py-[0.3vw] text-[0.8vw] hover:brightness-105 active:brightness-90 transition truncate 
+      portrait:text-[2.3vw] portrait:px-[0.5vw]"
           >
             {label}
           </button>
         ))}
 
-        {/* Bonus Box */}
-        <div className="flex items-center justify-center bg-yellow-300 border border-black rounded-xl px-2 py-1 flex-1 min-w-[80px]">
-          <div className="flex flex-col items-center text-center leading-tight">
-            <span className="text-[10px] sm:text-xs font-bold">Balance</span>
-          </div>
-          <span className="ml-2 bg-white text-red-600 font-extrabold text-[10px] sm:text-sm px-2 py-1 rounded border border-black">
+        {/* Balance Box */}
+        <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw] portrait:hidden">
+          <span className="text-[0.8vw] font-bold leading-tight portrait:text-[2.3vw]">Balance</span>
+          <span className="ml-[0.3vw] bg-white text-red-600 font-extrabold text-[0.8vw] px-[0.5vw] py-[0.1vw] rounded border border-black truncate portrait:text-[2.3vw]">
             10000$
           </span>
         </div>
       </div>
+
     </div>
   );
 }
