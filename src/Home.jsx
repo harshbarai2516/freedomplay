@@ -113,10 +113,10 @@ function Home() {
 
         {/* RIGHT - Result Boxes */}
         <div className="flex items-center justify-center w-[15%] lg:w-[15%] bg-teal-500 flex items-center justify-center p-0  gap-[0.4vw]">
-          <div className="flex-1 bg-white  flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] sm:h-[4vh] md:h-[4vh] lg:h-[8vh] xl:h-[5vh] portrait: h-[1.2vh] potrait: text-[2.5vw]">
+          <div className="flex-1 bg-white  flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] sm:h-[4vh] md:h-[4vh] lg:h-[8vh] xl:h-[5vh] portrait: h-[1.8vh] potrait: text-[2.5vw]">
             04
           </div>
-          <div className="flex-1 bg-white  flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw]  sm:h-[4vh] md:h-[4vh] lg:h-[8vh] xl:h-[5vh]  portrait: h-[1.2vh] potrait: text-[2.5vw] ">
+          <div className="flex-1 bg-white  flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw]  sm:h-[4vh] md:h-[4vh] lg:h-[8vh] xl:h-[5vh]  portrait: h-[1.8vh] potrait: text-[2.5vw] ">
             0
           </div>
         </div>
