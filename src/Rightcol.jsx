@@ -14,7 +14,7 @@ export default function RightCol() {
           <div key={col.title} className="flex flex-col h-full gap-[3px] sm:gap-[2.5px] md:gap-[3px]">
             {/* Header */}
             <div 
-              className={`h-[8.5vh] bg-red-600 text-white font-bold  flex items-center justify-center flex-shrink-0 portrait:h-[3.2vh] portrait:text-[2vw]
+              className={`h-[5vh] sm:h-[8.5vh] md:h-[8.5vh] lg:h-[5vh] xl:h-[5vh] bg-red-600 text-white font-bold  flex items-center justify-center flex-shrink-0 portrait:h-[3.2vh] portrait:text-[2vw]
               `}
             >
               {col.title}

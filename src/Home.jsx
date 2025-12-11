@@ -6,6 +6,7 @@ import Filter from "./Filter.jsx";
 import NumberGrid from "./Numbergrid.jsx";
 import Leftcol from "./Leftcol.jsx";
 import RightCol from "./Rightcol.jsx";
+import BottomRow from "./Bottomrow.jsx";
 import { useAuth } from "./context/Authcontext.jsx"; // 🔁 adjust path if needed
 
 function Home() {
@@ -75,51 +76,51 @@ function Home() {
         </div>
       </div>
 
-      <div className="w-full bg-teal-500 flex items-center justify-between px-[0.5vw] py-[0.3vw] h-[7vh] min-h-[55px]">
+      <div className="w-full h-[6vh] sm:h-[7vh] md:h-[8vh] lg:h-[9vh] xl:h-[7vh] bg-teal-500 flex items-center justify-between px-[0.1vw] py-[0.1vw] portrait:h-[3vh]">
 
-  {/* LEFT - AdvanceDraw Button */}
-  <div className="flex items-center justify-center flex-[1] min-w-[90px]">
-    <button className="bg-red-600 text-white font-bold rounded-md px-[1.5vw] py-[0.4vw] text-[0.9vw] sm:text-[1vw] md:text-[1.1vw] hover:bg-red-700 active:scale-[0.98] transition">
-      AdvanceDraw
-    </button>
-  </div>
+        {/* LEFT - AdvanceDraw Button */}
+        <div className="w-[20%] h-[100%] lg:w-[20%] bg-blue-500 flex items-center justify-center p-0">
+          <button className="bg-red-600 text-white font-bold w-[100%] h-[100%]   text-[1.9vw] sm:text-[2vw] md:text-[2.1vw] hover:bg-red-700 active:scale-[0.98] transition potrait: text-[2.5vw] portrait:px-[3vw] portrait:py-[1vw]">
+            AdvanceDraw
+          </button>
+        </div>
 
-  {/* MIDDLE - Transaction + Barcode + Buy */}
-  <div className="flex items-center justify-center flex-[3] gap-[1vw] min-w-[300px]">
+        {/* MIDDLE - Transaction + Barcode + Buy */}
+        <div className="w-[65%] h-[100%] lg:w-[65%] bg-purple-600 overflow-hidden flex items-center justify-center gap-[2vw] p-2">
 
-    {/* Last Transaction */}
-    <div className="flex flex-col justify-center items-start text-white font-semibold leading-tight min-w-[120px]">
-      <span className="text-[0.9vw] sm:text-[1vw] md:text-[1.1vw]">
-        Last Transaction:
-      </span>
-      <span className="text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] font-bold">
-        #22081690601 Pt(40)
-      </span>
-    </div>
+          {/* Last Transaction */}
+          <div className="flex flex-col justify-center items-start text-white font-semibold leading-tight min-w-[90px] ">
+            <span className="text-[0.9vw] sm:text-[1vw] md:text-[1.1vw] portrait: text-[2.5vw]">
+              Last Transaction:
+            </span>
+            <span className="text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] font-bold portrait: text-[2.5vw]">
+              #22081690601 Pt(40)
+            </span>
+          </div>
 
-    {/* Barcode Input */}
-    <input
-      type="text"
-      placeholder="Barcode"
-      className="flex-1 max-w-[200px] text-center text-gray-700 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] font-medium border-2 border-black rounded-md py-[0.3vw] px-[0.6vw] bg-white focus:outline-none focus:ring-2 focus:ring-purple-300"
-    />
+          {/* Barcode Input */}
+          <input
+            type="text"
+            placeholder="Barcode"
+            className="flex-1 w-[3vw] text-center text-gray-700 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] font-medium border-2 border-black rounded-md py-[0.3vw] px-[0.6vw] bg-white focus:outline-none focus:ring-2 focus:ring-purple-300 potrait: text-[2.5vw] "
+          />
 
-    {/* Buy Button */}
-    <button className="bg-red-600 text-white font-bold rounded-md px-[1.5vw] py-[0.4vw] text-[0.9vw] sm:text-[1vw] md:text-[1.1vw] hover:bg-red-700 active:scale-[0.98] transition whitespace-nowrap">
-      Buy
-    </button>
-  </div>
+          {/* Buy Button */}
+          <button className="bg-red-600 text-white font-bold  px-[4vw] py-[4vw] text-[0.9vw] sm:text-[1vw] md:text-[1.1vw] hover:bg-red-700 active:scale-[0.98] transition whitespace-nowrap potrait: text-[2.5vw] ">
+            Buy
+          </button>
+        </div>
 
-  {/* RIGHT - Result Boxes */}
-  <div className="flex items-center justify-center flex-[1] gap-[0.4vw] min-w-[80px]">
-    <div className="flex-1 bg-white rounded-lg flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] h-[4vh] min-h-[35px]">
-      0
-    </div>
-    <div className="flex-1 bg-white rounded-lg flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] h-[4vh] min-h-[35px]">
-      0
-    </div>
-  </div>
-</div>
+        {/* RIGHT - Result Boxes */}
+        <div className="flex items-center justify-center w-[15%] lg:w-[15%] bg-teal-500 flex items-center justify-center p-0  gap-[0.4vw]">
+          <div className="flex-1 bg-white  flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] h-[5vh] portrait: h-[2.4vh] potrait: text-[3vw]">
+            0
+          </div>
+          <div className="flex-1 bg-white  flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] h-[5vh]  portrait: h-[2.4vh] potrait: text-[3vw] ">
+            0
+          </div>
+        </div>
+      </div>
 
 
 
