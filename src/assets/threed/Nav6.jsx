@@ -151,7 +151,7 @@ const Nav6 = ({
                 : "btn-light border-dark"
             }`}
             style={{
-              padding: "0rem 0rem",
+              padding: "0.2rem 0rem",
               fontSize: isDesktop ? "1rem" : "clamp(0.5rem, 0.3vw, 0.2rem)",
               fontWeight: isDesktop ? "bold" : "normal",
               minWidth: "fit-content",

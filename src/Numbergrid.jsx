@@ -76,7 +76,7 @@ export default function NumberGrid({
     <div className="w-full h-full flex items-center justify-center overflow-hidden">
       <div className="w-full h-full bg-white flex flex-col">
         {/* Header Row */}
-        <div className="grid grid-cols-11 bg-gray-200 text-gray-800 font-semibold text-[0.5rem]">
+        <div className="grid grid-cols-11 bg-gray-200 text-gray-800 font-semibold text-[0.5rem] portrait:h-[3.2vh]">
           <div className="border-r border-gray-300 flex items-center justify-center portrait:text-[0.4rem]">
             BLOCK
           </div>
@@ -85,12 +85,22 @@ export default function NumberGrid({
               key={colIndex}
               className="border-r border-gray-300 flex flex-col items-center"
             >
-              <div  className="text-[0.6rem] font-bold portrait:text-[0.4rem]">{`B${colIndex}`}</div>
+              <div className="text-[0.6rem] font-bold portrait:text-[0.4rem]">{`B${colIndex}`}</div>
               <input
                 type="text"
                 value={colValues[colIndex]}
                 onChange={(e) => handleColChange(colIndex, e.target.value)}
-                className="w-10 h-5 border-1 border-black text-center text-[0.6rem] portrait:w-[4.5vw] portrait:h-[3.2vw]"
+                className="
+                    text-center border border-black text-[0.6rem]
+                    w-8 h-3                /* default: small mobile */
+                    sm:w-10 sm:h-4         /* small tablets / larger phones */
+                    md:w-12 md:h-5         /* tablets */
+                    lg:w-14 lg:h-5         /* laptops */
+                    xl:w-16 xl:h-5         /* desktops */
+                    2xl:w-18 2xl:h-6       /* very large screens */
+                    portrait:w-[4.5vw] portrait:h-[3.2vw] /* fine-tuned for portrait mode */
+                    border border-[red]
+                "
               />
             </div>
           ))}
@@ -105,7 +115,16 @@ export default function NumberGrid({
                 type="text"
                 value={rowValues[rowIndex]}
                 onChange={(e) => handleRowChange(rowIndex, e.target.value)}
-                className="w-10 h-5 border-1 border-black text-center text-[0.6rem]  portrait:w-[4.5vw] portrait:h-[3.2vw]"
+                className="
+                    text-center border border-black text-[0.6rem]
+                    w-8 h-3                /* default: small mobile */
+                    sm:w-10 sm:h-4         /* small tablets / larger phones */
+                    md:w-12 md:h-5         /* tablets */
+                    lg:w-14 lg:h-5         /* laptops */
+                    xl:w-16 xl:h-5         /* desktops */
+                    2xl:w-18 2xl:h-6       /* very large screens */
+                    portrait:w-[4.5vw] portrait:h-[3.2vw] /* fine-tuned for portrait mode */
+                "
               />
             </div>
 
@@ -121,8 +140,18 @@ export default function NumberGrid({
                   type="text"
                   value={gridValues[rowIndex][colIndex]}
                   onChange={(e) => handleCellChange(rowIndex, colIndex, e.target.value)}
-                  className="w-10 h-5 border-1 border-black text-center text-[0.6rem] portrait:w-[4.5vw] portrait:h-[3.2vw]"
+                  className="
+                    text-center border border-black text-[0.6rem]
+                    w-8 h-3                /* default: small mobile */
+                    sm:w-10 sm:h-4         /* small tablets / larger phones */
+                    md:w-12 md:h-5         /* tablets */
+                    lg:w-14 lg:h-5         /* laptops */
+                    xl:w-16 xl:h-5         /* desktops */
+                    2xl:w-18 2xl:h-6       /* very large screens */
+                    portrait:w-[4.5vw] portrait:h-[3.2vw] /* fine-tuned for portrait mode */
+                  "
                 />
+
               </div>
             ))}
           </div>

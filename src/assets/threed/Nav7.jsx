@@ -12,7 +12,7 @@ const Nav7 = ({ setSelectedTypes, inputsDisabled }) => {
     AP: false,
   });
 
-  // ⭐ Desktop flag
+  // Desktop flag
   const [isDesktop, setIsDesktop] = useState(window.innerWidth >= 1024);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const Nav7 = ({ setSelectedTypes, inputsDisabled }) => {
   }, [checkedItems, setSelectedTypes]);
 
   const handleChange = (item) => {
-    if (inputsDisabled) return; // 🔹 Prevent changing when disabled
+    if (inputsDisabled) return; // Prevent changing when disabled
 
     if (item === "ALL") {
       const newChecked = !checkedItems.ALL;
@@ -123,7 +123,7 @@ const Nav7 = ({ setSelectedTypes, inputsDisabled }) => {
         {/* Trans-ID Input */}
         <div style={{ flex: "1 1 0", minWidth: 0, paddingLeft: "0.1rem" }}>
           <input
-            type="text"
+            type="number"
             placeholder="Trans-ID"
             className="form-control fw-bold"
             style={{

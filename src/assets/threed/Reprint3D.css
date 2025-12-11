@@ -1,0 +1,241 @@
+/* ================================
+   Page Background
+================================ */
+.reprint-page {
+  min-height: 100vh;
+  padding: 20px;
+  background: linear-gradient(135deg, #1d2671, #c33764, #f7971e);
+  background-size: 300% 300%;
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ================================
+   Header
+================================ */
+.reprint-header {
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  padding: 15px 20px;
+}
+
+.reprint-date {
+  font-size: 0.85rem;
+  color: #fff;
+  opacity: 0.8;
+}
+
+/* ================================
+   Table UI
+================================ */
+.reprint-table-wrap {
+  max-height: 80vh;
+  overflow-y: auto;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.reprint-table {
+  background: rgba(255,255,255,0.95);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.reprint-table thead {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.reprint-table tbody tr:hover {
+  background: #f3f4f6;
+}
+
+/* ================================
+   Modal Fixes
+================================ */
+.reprint-modal {
+  max-width: 450px;
+  width: 100%;
+  margin-left: 15% !important;
+  top: 2% !important;
+}
+
+.reprint-modal-content {
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.reprint-modal-header {
+  background: linear-gradient(135deg, #1d2671, #c33764);
+  color: #fff;
+  border-bottom: none;
+}
+
+.reprint-ticket-html {
+  background: #f4f6ff;
+  border-left: 4px solid #667eea;
+  padding: 10px;
+  border-radius: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.reprint-close-btn {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-radius: 20px;
+  padding: 6px 20px;
+}
+
+/* ================================
+   MOBILE PORTRAIT
+================================ */
+@media (max-width: 991px) and (orientation: portrait) {
+  .reprint-modal {
+    max-width: 95% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    top: -100px !important;
+  }
+
+  .reprint-table {
+    font-size: 12px;
+  }
+}
+
+/* ================================
+   MOBILE LANDSCAPE
+================================ */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  .reprint-modal {
+    max-width: 95% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .reprint-table {
+    font-size: 13px;
+  }
+}
+
+/* ================================
+   SMALL DEVICES
+================================ */
+@media (max-width: 576px) {
+  .modal-dialog {
+    margin: 0.5rem !important;
+    max-width: 95vw !important;
+  }
+}
+
+/* ================================
+   Prevent Background Scroll
+================================ */
+body.modal-open {
+  overflow: hidden;
+}
+
+/* ================================
+   🌈 Gradient Modal
+================================ */
+
+.gradient-modal-content {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 18px;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+}
+
+.gradient-modal-header {
+  border-bottom: none;
+  background: linear-gradient(135deg, #6a82fb, #fc5c7d);
+  color: #fff;
+  justify-content: space-between;
+  border-radius: 18px 18px 0 0;
+}
+
+.modal-gradient-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.modal-info-box {
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 10px;
+  color: #fff;
+}
+
+.modal-info-box span {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  opacity: 0.8;
+}
+
+.modal-info-box p {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-top: 4px;
+}
+
+.ticket-numbers-card {
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  padding: 12px;
+  max-height: 180px;
+  overflow-y: auto;
+  color: #fff;
+}
+
+/* Scrollbar */
+.ticket-numbers-card::-webkit-scrollbar {
+  width: 6px;
+}
+.ticket-numbers-card::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.5);
+  border-radius: 3px;
+}
+
+.gradient-close-btn {
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  padding: 6px 18px;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.gradient-close-btn:hover {
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-2px);
+}
+/* Make ticket numbers visible */
+.reprint-ticket-html table,
+.reprint-ticket-html td,
+.reprint-ticket-html th {
+  font-weight: 700;
+  color: #000 !important;      /* White text */
+  font-size: 0.85rem;          /* Optional: adjust size */
+  border: none;                /* Optional: remove table borders */
+}
+
+.reprint-ticket-html table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.reprint-ticket-html td {
+  padding: 2px 4px;
+}

@@ -15,16 +15,16 @@ export default function Filter() {
   const navigate = useNavigate();
 
   const mainRanges = [
-    { label: "00-,09", color: "bg-blue-600" },
-    { label: "10-,19", color: "bg-blue-600" },
-    { label: "20-,29", color: "bg-green-600" },
-    { label: "30-,39", color: "bg-red-600" },
-    { label: "40-,49", color: "bg-purple-600" },
-    { label: "50-,59", color: "bg-yellow-500" },
-    { label: "60-,69", color: "bg-pink-600" },
-    { label: "70-,79", color: "bg-teal-600" },
-    { label: "80-,89", color: "bg-orange-500" },
-    { label: "90-,99", color: "bg-indigo-600" },
+    { label: "00-09", color: "bg-blue-600" },
+    { label: "10-19", color: "bg-blue-600" },
+    { label: "20-29", color: "bg-green-600" },
+    { label: "30-39", color: "bg-red-600" },
+    { label: "40-49", color: "bg-purple-600" },
+    { label: "50-59", color: "bg-yellow-500" },
+    { label: "60-69", color: "bg-pink-600" },
+    { label: "70-79", color: "bg-teal-600" },
+    { label: "80-89", color: "bg-orange-500" },
+    { label: "90-99", color: "bg-indigo-600" },
   ];
 
   const toggleMainCheck = (label) => {
@@ -45,7 +45,7 @@ export default function Filter() {
   };
 
   return (
-    <div className="w-full h-full flex flex-row flex-wrap items-center justify-start gap-[0.5vw] p-[0.3vw] overflow-hidden bg-gray-50">
+    <div className="w-full h-full flex flex-row flex-wrap items-center justify-start gap-[0.7vw] p-[0.3vw] overflow-hidden bg-gray-50">
       {/* All checkbox */}
       <div className="flex items-center gap-[0.6vw]">
         <input
@@ -71,12 +71,12 @@ export default function Filter() {
           />
           <button
             onClick={() => setMainRange(btn.label)}
-            className={`${btn.color} text-white rounded-md px-[0.8vw] py-[0.3vw] text-[1vw] font-semibold 
+            className={`${btn.color} text-white rounded-md px-[0.9vw] py-[0.3vw] text-[1.3vw] font-semibold 
             ${mainRange === btn.label ? "ring-1 ring-black" : ""}
             portrait:text-[2.5vw] portrait:px-[0.5vw] portrait:py-[2vw] portrait:p-1 flex flex-col portrait:leading-tight`}
           >
             <span className="hidden portrait:block">
-              {btn.label.split(",")[0]}<br />{btn.label.split(",")[1]}
+              {btn.label.split("-")[0]}<br />-{btn.label.split("-")[1]}
             </span>
             <span className="portrait:hidden">{btn.label}</span>
           </button>
@@ -97,31 +97,36 @@ export default function Filter() {
 
 
       {/* Action Buttons */}
-      <div className="flex items-center gap-[0.5vw] flex-wrap">
-        <button className="bg-red-600 text-white font-semibold rounded-md px-[0.8vw] py-[0.3vw] text-[1vw] portrait:text-[2.5vw]" onClick={() => navigate('/home')}>
-          3D Game
-        </button>
-        <button className="bg-black text-white  px-[0.8vw] py-[0.3vw] text-[1vw] portrait:text-[3vw]">
-          Password
-        </button>
-        <button className="bg-black text-white  px-[0.8vw] py-[0.3vw] text-[1vw] portrait:text-[3vw]">
-          Logout
-        </button>
-        <button className="bg-yellow-300 text-white px-[0.6vw] py-[0.3vw] text-[1vw] 
-  portrait:text-[3vw] portrait:w-[23vw] portrait:h-[6vw] flex items-center justify-center 
-  flex-col portrait:flex-row">
+     <div className="flex items-center gap-[0.5vw] flex-wrap portrait:flex hidden portrait:flex">
+  <button
+    className="bg-red-600 text-white font-semibold rounded-md px-[0.8vw] py-[0.3vw] text-[1vw] portrait:text-[2.5vw]"
+    onClick={() => navigate('/home')}
+  >
+    3D Game
+  </button>
 
-          <span className="text-[10px] text-black sm:text-[10px] font-bold leading-tight text-center portrait:mr-1">
-            Balance
-          </span>
+  <button className="bg-black text-white px-[0.8vw] py-[0.3vw] text-[1vw] portrait:text-[3vw]">
+    Password
+  </button>
 
-          <span className="bg-white text-red-600 font-extrabold text-[9px] sm:text-[10px] px-0.1 py-0.5 border border-black truncate">
-            10000$
-          </span>
+  <button className="bg-black text-white px-[0.8vw] py-[0.3vw] text-[1vw] portrait:text-[3vw]">
+    Logout
+  </button>
 
-        </button>
+  <button
+    className="bg-yellow-300 text-white px-[0.6vw] py-[0.3vw] text-[1vw]
+    portrait:text-[3vw] portrait:w-[23vw] portrait:h-[6vw] flex items-center justify-center
+    flex-col portrait:flex-row"
+  >
+    <span className="text-[10px] text-black sm:text-[10px] font-bold leading-tight text-center portrait:mr-1">
+      Balance
+    </span>
+    <span className="bg-white text-red-600 font-extrabold text-[9px] sm:text-[10px] px-0.1 py-0.5 border border-black truncate">
+      10000$
+    </span>
+  </button>
+</div>
 
-      </div>
     </div>
   );
 }

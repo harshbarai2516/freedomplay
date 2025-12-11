@@ -6,6 +6,10 @@ import { HashRouter, Routes, Route } from "react-router-dom"; // ✅ switched to
 import Alpha from "./Alpha.jsx";
 import Login from "./Login.jsx";
 import Home from "../../Home.jsx"; // ✅ keep your Home page
+import Reprint3D from "./Reprint3D.jsx";
+import Cancel3D from "./Cancel3D.jsx";
+import Account3D from "./Account3D.jsx";
+import Result3D from "./Result3D.jsx";
 
 export default function Sigma() {
   return (
@@ -18,6 +22,10 @@ export default function Sigma() {
         {/* Other pages */}
         <Route path="/home" element={<Alpha />} />
         <Route path="/twod" element={<Home />} />
+        <Route path="/reprint" element={<Reprint3D/>} />
+      <Route path="/cancel" element={<Cancel3D/>} />
+      <Route path="/account" element={<Account3D/>}/>
+     <Route path="/result" element={<Result3D/>}/>
       </Routes>
     </HashRouter>
   );

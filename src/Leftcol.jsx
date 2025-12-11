@@ -97,7 +97,7 @@ export default function Leftcol({
       <div className="grid w-full h-full gap-[3px]">
         {/* All */}
         <div
-          className="flex items-center bg-gradient-to-r from-red-500 to-red-700 border border-red-800 rounded-[1vw] text-white cursor-pointer transition-all duration-200 overflow-hidden px-[6px] hover:scale-[1.03] hover:shadow-md"
+          className="flex items-center bg-gradient-to-r from-red-500 to-red-700 border border-red-800 rounded-[1vw] text-white cursor-pointer transition-all duration-200 overflow-hidden px-[6px] hover:scale-[1.03] hover:shadow-md "
         >
           <input
             type="checkbox"

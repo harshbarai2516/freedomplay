@@ -25,34 +25,40 @@ const Alpha = () => {
   const [advancedDraws, setAdvancedDraws] = useState([]);
   const [quantity, setQuantity] = useState(0);
   const [nextSlot, setNextSlot] = useState("");
+
   const [rangeFrom, setRangeFrom] = useState("");
   const [rangeTo, setRangeTo] = useState("");
 
+  // 👉 LOGIN CHECK
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) navigate("/");
+    if (!token) navigate("/login");
   }, [navigate]);
 
+  // 👉 NEW RESULT GENERATION USING GET API
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) return;
+    const fetchResult = async () => {
+      try {
+        const today = new Date().toISOString().split("T")[0];
+        const lastGenerated = localStorage.getItem("lastGeneratedDate");
 
-    const today = new Date().toISOString().split("T")[0];
-    const lastGenerated = localStorage.getItem("lastGeneratedDate");
+        if (lastGenerated !== today) {
+          const res = await axios.get("https://freedomplay.us/api/results/3d");
+          console.log("✅ Result Fetched:", res.data);
 
-    if (lastGenerated !== today) {
-      axios
-        .get("https://thewonder.uk/royalgame/api/generate_result", {
-          headers: { Authorization: `Bearer ${token}` },
-        })
-        .then((res) => {
-          console.log("✅ Result generated:", res.data);
           localStorage.setItem("lastGeneratedDate", today);
-        })
-        .catch((err) => console.error("❌ Error generating result:", err));
-    }
+        } else {
+          console.log("ℹ️ Result already generated today");
+        }
+      } catch (err) {
+        console.error("❌ API Error:", err.response?.data || err.message);
+      }
+    };
+
+    fetchResult();
   }, []);
 
+  // 👉 ADD NUMBER FUNCTION
   const handleAddNumber = useCallback(() => {
     const trimmed = numberInput.trim();
     if (!/^\d{2,3}$/.test(trimmed)) return;
@@ -70,39 +76,19 @@ const Alpha = () => {
 
       if (trimmed.length === 3) {
         if (type === "SP")
-          newItems.push({
-            number: `${first}${last}`,
-            type,
-            rate: selectedRate,
-          });
+          newItems.push({ number: `${first}${last}`, type, rate: selectedRate });
         else if (type === "FP")
-          newItems.push({
-            number: `${first}${second}`,
-            type,
-            rate: selectedRate,
-          });
+          newItems.push({ number: `${first}${second}`, type, rate: selectedRate });
         else if (type === "BP")
-          newItems.push({
-            number: `${second}${last}`,
-            type,
-            rate: selectedRate,
-          });
+          newItems.push({ number: `${second}${last}`, type, rate: selectedRate });
         else if (type === "AP") {
-          const options = [
-            `${first}${last}`,
-            `${first}${second}`,
-            `${second}${last}`,
-          ];
+          const options = [`${first}${last}`, `${first}${second}`, `${second}${last}`];
           const pick = options[Math.floor(Math.random() * options.length)];
           newItems.push({ number: pick, type, rate: selectedRate });
         }
       } else {
         if (["SP", "FP", "BP", "AP"].includes(type)) {
-          newItems.push({
-            number: `${first}${second}`,
-            type,
-            rate: selectedRate,
-          });
+          newItems.push({ number: `${first}${second}`, type, rate: selectedRate });
         }
       }
     });
@@ -113,8 +99,10 @@ const Alpha = () => {
     }
   }, [numberInput, selectedTypes, selectedRate]);
 
+  // 👉 AUTO ADD WHEN FULL NUMBER ENTERED
   useEffect(() => {
     if (!numberInput) return;
+
     const onlySpecials =
       selectedTypes.length > 0 &&
       selectedTypes.every((t) => ["SP", "FP", "BP", "AP"].includes(t));
@@ -128,19 +116,15 @@ const Alpha = () => {
     }
   }, [numberInput, selectedTypes, handleAddNumber]);
 
+  // 👉 REMOVE NUMBER
   const handleRemove = (indexToRemove) => {
     setDisplayList((prev) => prev.filter((_, i) => i !== indexToRemove));
   };
 
-  const baseAmount = displayList.reduce(
-    (sum, item) => sum + Number(item.rate || 0),
-    0
-  );
-
-  const advanceDrawFee = advancedDraws.length; // fee per draw
+  const baseAmount = displayList.reduce((sum, item) => sum + Number(item.rate || 0), 0);
+  const advanceDrawFee = advancedDraws.length;
   const grandTotal = baseAmount * selectedZones.length + totalAmount;
-  const FinalTotal =
-    advanceDrawFee > 0 ? grandTotal * advanceDrawFee : grandTotal;
+  const FinalTotal = advanceDrawFee > 0 ? grandTotal * advanceDrawFee : grandTotal;
 
   return (
     <div>
@@ -157,10 +141,7 @@ const Alpha = () => {
         lpickType={lpickType}
         setInputsDisabled={setInputsDisabled}
       />
-      <Nav7
-        setSelectedTypes={setSelectedTypes}
-        inputsDisabled={inputsDisabled}
-      />
+      <Nav7 setSelectedTypes={setSelectedTypes} inputsDisabled={inputsDisabled} />
       <Nav8
         numberInput={numberInput}
         setNumberInput={setNumberInput}
@@ -175,10 +156,9 @@ const Alpha = () => {
         setRangeTo={setRangeTo}
         lpickType={lpickType}
         setLpickType={setLpickType}
-        inputsDisabled={inputsDisabled} // ✅ add this line
+        inputsDisabled={inputsDisabled}
         setQuantity={setQuantity}
       />
-
       <Nav9 displayList={displayList} onRemove={handleRemove} />
       <Nav10
         totalAmount={FinalTotal}

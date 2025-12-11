@@ -1,0 +1,197 @@
+/* ===== Premium Background ===== */
+.cancel-page {
+  min-height: 100vh;
+  padding: 10px;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== Header Bar (Horizontal Layout) ===== */
+.cancel-header {
+  display: flex;
+  flex-direction: row;               /* ✅ Forces Horizontal */
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 14px 20px;
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border-radius: 22px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+}
+
+/* Calendar Button */
+.date-btn {
+  min-width: 260px;
+  font-weight: 700;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #fc00ff, #00dbde);
+  border: none;
+  color: #ffffff;
+  padding: 10px 18px;
+  box-shadow: 0 4px 15px rgba(252, 0, 255, 0.5);
+}
+
+/* Home Button */
+.home-btn {
+  background: linear-gradient(135deg, #fc00ff, #00dbde);
+  color: white;
+  font-weight: 700;
+  padding: 10px 35px;
+  border-radius: 50px;
+  border: none;
+  box-shadow: 0 4px 15px rgba(252, 0, 255, 0.5);
+  transition: all 0.2s ease-in-out;
+}
+
+.home-btn:hover {
+  transform: translateY(-1px) scale(1.03);
+}
+
+/* ===== Ticket Card ===== */
+.ticket-wrapper {
+  margin-top: 15px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+/* ===== Table Styling ===== */
+.ticket-table {
+  width: 100%;
+  margin: 0;
+  font-size: 14px;
+}
+
+.ticket-table thead {
+  background: linear-gradient(135deg, #141e30, #243b55);
+  color: white;
+}
+
+.ticket-table th,
+.ticket-table td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 12px 8px;
+  white-space: nowrap;
+}
+
+/* Cancel Button */
+.cancel-btn {
+  font-size: 12px;
+  padding: 5px 16px;
+  border-radius: 50px;
+  background: linear-gradient(135deg, #ff0844, #ffb199);
+  border: none;
+  color: white;
+  box-shadow: 0 2px 10px rgba(255, 8, 68, 0.6);
+}
+
+/* ===== Scroll ===== */
+.ticket-scroll {
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+/* ✅ MOBILE LANDSCAPE */
+/* ===== LANDSCAPE FIX — paste at end of Cancel.css ===== */
+/* more specific selectors and !important where needed to beat other rules */
+@media screen and (max-width: 991px) and (orientation: landscape) {
+  /* header layout — keep horizontal and balanced */
+  .cancel-header {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+    gap: 10px !important;
+    padding: 10px 12px !important;
+  }
+
+  /* Date button: allow it to expand, remove min-width shrink */
+  .cancel-header .date-btn,
+  .date-btn {
+    flex: 1 1 auto !important;        /* take remaining space */
+    width: auto !important;
+    min-width: 0 !important;          /* important: allow shrinking if needed */
+    font-size: 15px !important;
+    padding: 10px 14px !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Home button: fixed comfortable size but responsive */
+  .cancel-header .home-btn,
+  .home-btn {
+    flex: 0 0 auto !important;
+    font-size: 15px !important;
+    padding: 10px 20px !important;
+    margin-left: 8px !important;
+    white-space: nowrap !important;
+  }
+
+  /* Ensure calendar popup doesn't overflow header */
+  .cancel-header .react-calendar,
+  .position-absolute > .react-calendar {
+    max-width: 320px !important;
+    width: auto !important;
+  }
+
+  /* Table and cancel button sizing */
+  .ticket-table {
+    font-size: 13px !important;
+  }
+
+  .ticket-table td,
+  .ticket-table th {
+    padding: 8px 6px !important;
+  }
+
+  .ticket-table .cancel-btn,
+  .cancel-btn {
+    font-size: 13px !important;
+    padding: 2px 16px !important;
+    border-radius: 999px !important;
+  }
+
+  /* Scroll region height for landscape */
+  .ticket-scroll {
+    max-height: 55vh !important;
+  }
+}
+
+/* ✅ MOBILE PORTRAIT */
+@media (max-width: 991px) and (orientation: portrait) {
+  .cancel-header {
+    flex-direction: row;     /* ✅ Still horizontal */
+    gap: 8px;
+    justify-content: space-between;
+  }
+
+  .date-btn {
+    flex: 1;
+    font-size: 13px;
+  }
+
+  .home-btn {
+    flex: 0.5;
+    font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .ticket-wrapper {
+    border-radius: 14px;
+  }
+
+  .ticket-table {
+    font-size: 12px;
+  }
+
+  .ticket-scroll {
+    max-height: 60vh;
+  }
+
+  .ticket-table th,
+  .ticket-table td {
+    padding: 7px 4px;
+  }
+}

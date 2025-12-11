@@ -7,7 +7,7 @@ export default function Notification() {
       <marquee
         behavior="scroll"
         direction="left"
-        className="block text-[1.2vw] sm:text-[1.4vw] md:text-[1.2vw] lg:text-[1vw] xl:text-[0.9vw] py-[1vw] sm:py-[0.8vw] md:py-[0.6vw] rounded-[0.6vw] portrait:text-[2.5vw] "
+        className="block text-[1vw] sm:text-[1vw] md:text-[1vw] lg:text-[1vw] xl:text-[0.9vw] py-[1vw] sm:py-[0.8vw] md:py-[0.6vw] rounded-[0.6vw] portrait:text-[2.5vw] "
       >
         Welcome to the Main Star!  Welcome to the Main Star!  Welcome to the Main Star!
       </marquee>

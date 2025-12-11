@@ -13,13 +13,9 @@ export default function RightCol() {
         {columns.map((col) => (
           <div key={col.title} className="flex flex-col h-full gap-[3px] sm:gap-[2.5px] md:gap-[3px]">
             {/* Header */}
-            <div
-              className="text-white font-bold rounded-[4px] flex items-center justify-center flex-shrink-0"
-              style={{
-                backgroundColor: col.color,
-                fontSize: "calc(10px + 0.4vw)",
-                height: "calc(20px + 1.7vh)",
-              }}
+            <div 
+              className={`h-[8.5vh] bg-red-600 text-white font-bold  flex items-center justify-center flex-shrink-0 portrait:h-[3.2vh] portrait:text-[2vw]
+              `}
             >
               {col.title}
             </div>

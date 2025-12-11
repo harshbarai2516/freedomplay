@@ -84,63 +84,76 @@ export default function UpperRow() {
         </div>
       )}
 
-      {/* Main Container - Single Row with Wrap */}
-      <div
-        className="
-    flex flex-nowrap items-center justify-between w-full 
-    gap-[0.4vw] px-[0.5vw] py-[0.3vw] overflow-hidden 
-    portrait:gap-[0.2vw] portrait:scale-[1]
-  "
-      >
-        {/* CT (Current Time) */}
+   
+
+        <div className="flex items-center gap-[0.6vw] flex-wrap pb-[0.5vw]">
+
+               {/* CT (Current Time) */}
         <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.6vw] py-[0.3vw]">
-          <span className="bg-black text-white text-[0.8vw] font-bold rounded px-[0.3vw] mr-[0.3vw] portrait:text-[2.2vw]">
+          <span className="bg-black text-white text-[1.5vw] font-bold rounded px-[0.3vw] mr-[0.3vw] portrait:text-[2.2vw]">
             CT
           </span>
-          <span className="text-[0.8vw] font-bold truncate portrait:text-[2.2vw]">
+          <span className="text-[1.5vw] font-bold truncate portrait:text-[2.2vw]">
             {timeData?.currentTime12?.slice(0, 8) || "Loading"}
           </span>
         </div>
 
         {/* CS (Close Time) */}
         <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.6vw] py-[0.3vw]">
-          <span className="bg-black text-white text-[0.8vw] font-bold rounded px-[0.3vw] mr-[0.3vw] portrait:text-[2.2vw]">
+          <span className="bg-black text-white text-[1.5vw] font-bold rounded px-[0.3vw] mr-[0.3vw] portrait:text-[2.2vw]">
             CS
           </span>
-          <span className="text-[0.8vw] font-bold truncate portrait:text-[2.2vw]">
+          <span className="text-[1.5vw] font-bold truncate portrait:text-[2.2vw]">
             {formatTimeWithoutSeconds(timeData?.drawTime)?.slice(0, 8) || "Loading"}
           </span>
         </div>
 
         {/* RT (Remaining Time) */}
         <div className="flex-shrink-0 flex items-center justify-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw]">
-          <span className="text-[0.9vw] font-extrabold text-gray-900 portrait:text-[2.4vw]">
+          <span className="text-[1.5vw] font-extrabold text-gray-900 portrait:text-[2.4vw]">
             {timeData?.remainingTime?.slice(0, 5) || "00:00"}
           </span>
-          <span className="ml-[0.3vw] text-[0.8vw] font-semibold portrait:text-[2.2vw]">RT</span>
+          <span className="ml-[0.3vw] text-[1.5vw] font-semibold portrait:text-[2.2vw]">RT</span>
         </div>
 
-        {/* Static Buttons */}
-        {["RESULT", "ACCOUNT", "REPRINT", "CANCEL", "REFRESH"].map((label) => (
-          <button
-            key={label}
-            className="flex-shrink-0 bg-lime-400 border border-black rounded-lg font-bold 
-      px-[0.8vw] py-[0.3vw] text-[0.8vw] hover:brightness-105 active:brightness-90 transition truncate 
-      portrait:text-[2.3vw] portrait:px-[0.5vw]"
-          >
-            {label}
+
+          {/* Static Buttons */}
+          {["RESULT", "ACCOUNT", "REPRINT", "CANCEL", "REFRESH"].map((label) => (
+            <button
+              key={label}
+              className="flex-shrink-0 bg-lime-400 border border-black rounded-lg font-bold 
+              px-[0.8vw] py-[0.3vw] text-[1.1vw] hover:brightness-105 active:brightness-90 transition truncate 
+              portrait:text-[2.2vw] portrait:px-[0.5vw]"
+            >
+              {label}
+            </button>
+          ))}
+          <button className="bg-red-600 text-white font-semibold rounded-md px-[0.8vw] py-[0.3vw] text-[1.4vw] portrait:hidden" onClick={() => navigate('/home')}>
+            3D Game
           </button>
-        ))}
+          <button className="bg-black text-white  px-[0.8vw] py-[0.3vw] text-[1.4vw] portrait:hidden">
+            Password
+          </button>
+          <button className="bg-black text-white  px-[0.8vw] py-[0.3vw] text-[1vw] portrait:hidden">
+            Logout
+          </button>
+          <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw] portrait:hidden">
+            <span className="text-[1.2vw] font-bold leading-tight portrait:text-[2.3vw]">Balance</span>
+            <span className="ml-[0.3vw] bg-white text-red-600 font-extrabold text-[1.2vw] px-[0.5vw] py-[0.1vw] rounded border border-black truncate portrait:text-[2.3vw]">
+              10000$
+            </span>
+          </div>
+
+        </div>
 
         {/* Balance Box */}
-        <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw] portrait:hidden">
+        {/* <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw] portrait:hidden">
           <span className="text-[0.8vw] font-bold leading-tight portrait:text-[2.3vw]">Balance</span>
           <span className="ml-[0.3vw] bg-white text-red-600 font-extrabold text-[0.8vw] px-[0.5vw] py-[0.1vw] rounded border border-black truncate portrait:text-[2.3vw]">
             10000$
           </span>
-        </div>
+        </div> */}
       </div>
 
-    </div>
   );
 }

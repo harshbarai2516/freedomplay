@@ -75,53 +75,54 @@ function Home() {
         </div>
       </div>
 
-      {/* Section 6 */}
-      <div className="h-[7%] w-full bg-teal-500 flex flex-row">
-        <div className="w-[20%] flex items-center justify-center p-0">
-          <div className="flex w-full h-full gap-[0.3vw] items-center justify-center p-1">
-         <button className="bg-red-600 text-white font-bold rounded-md px-[8vw] py-[0.5vw] text-sm sm:text-base hover:bg-red-700 active:scale-[0.98] transition portrait:text-[2.5vw]">
-              AdvanceDraw
-            </button>
-          </div>
-        </div>
+      <div className="w-full bg-teal-500 flex items-center justify-between px-[0.5vw] py-[0.3vw] h-[7vh] min-h-[55px]">
 
-        <div className="w-[65%] bg-teal-500 flex items-center justify-center p-[0.4vw]">
-          <div className="flex w-full h-full items-center justify-between gap-[0.6vw] px-[0.6vw]">
-            {/* Left Text */}
-            <div className="flex flex-col justify-center text-white font-semibold leading-tight">
-              <span className="text-[0.8rem] sm:text-sm md:text-base lg:text-lg portrait:text-[0.4rem]">
-                Last Transaction:
-              </span>
-              <span className="text-[0.75rem] sm:text-sm md:text-base font-bold portrait:text-[0.4rem]">
-                #22081690601 Pt(40)
-              </span>
-            </div>
+  {/* LEFT - AdvanceDraw Button */}
+  <div className="flex items-center justify-center flex-[1] min-w-[90px]">
+    <button className="bg-red-600 text-white font-bold rounded-md px-[1.5vw] py-[0.4vw] text-[0.9vw] sm:text-[1vw] md:text-[1.1vw] hover:bg-red-700 active:scale-[0.98] transition">
+      AdvanceDraw
+    </button>
+  </div>
 
-            {/* Middle Input */}
-            <input
-              type="text"
-              placeholder="Barcode"
-              className="flex-1 max-w-[40%] text-center text-gray-700 text-sm sm:text-base font-medium border-2 border-black rounded-md py-[0.4vw] px-[0.6vw] bg-white focus:outline-none focus:ring-2 focus:ring-purple-300"
-            />
+  {/* MIDDLE - Transaction + Barcode + Buy */}
+  <div className="flex items-center justify-center flex-[3] gap-[1vw] min-w-[300px]">
 
-            {/* Right Button */}
-            <button className="bg-red-600 text-white font-bold rounded-md px-[8vw] py-[0.5vw] text-sm sm:text-base hover:bg-red-700 active:scale-[0.98] transition">
-              Buy
-            </button>
-          </div>
-        </div>
+    {/* Last Transaction */}
+    <div className="flex flex-col justify-center items-start text-white font-semibold leading-tight min-w-[120px]">
+      <span className="text-[0.9vw] sm:text-[1vw] md:text-[1.1vw]">
+        Last Transaction:
+      </span>
+      <span className="text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] font-bold">
+        #22081690601 Pt(40)
+      </span>
+    </div>
 
-        <div className="w-[15%] flex items-center justify-center p-1">
-          <div className="flex w-full h-full gap-[0.3vw] items-center justify-center">
-            <div className="flex-1 bg-white rounded-lg flex items-center justify-center font-bold text-gray-900 text-sm sm:text-base lg:text-lg h-[80%]">
-              0
-            </div>
-            <div className="flex-1 bg-white rounded-lg flex items-center justify-center font-bold text-gray-900 text-sm sm:text-base lg:text-lg h-[80%]">
-              0
-            </div>
-          </div>
-        </div>
-      </div>
+    {/* Barcode Input */}
+    <input
+      type="text"
+      placeholder="Barcode"
+      className="flex-1 max-w-[200px] text-center text-gray-700 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] font-medium border-2 border-black rounded-md py-[0.3vw] px-[0.6vw] bg-white focus:outline-none focus:ring-2 focus:ring-purple-300"
+    />
+
+    {/* Buy Button */}
+    <button className="bg-red-600 text-white font-bold rounded-md px-[1.5vw] py-[0.4vw] text-[0.9vw] sm:text-[1vw] md:text-[1.1vw] hover:bg-red-700 active:scale-[0.98] transition whitespace-nowrap">
+      Buy
+    </button>
+  </div>
+
+  {/* RIGHT - Result Boxes */}
+  <div className="flex items-center justify-center flex-[1] gap-[0.4vw] min-w-[80px]">
+    <div className="flex-1 bg-white rounded-lg flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] h-[4vh] min-h-[35px]">
+      0
+    </div>
+    <div className="flex-1 bg-white rounded-lg flex items-center justify-center font-bold text-gray-900 text-[1vw] sm:text-[1.1vw] md:text-[1.2vw] h-[4vh] min-h-[35px]">
+      0
+    </div>
+  </div>
+</div>
+
+
+
     </div>
   );
 }

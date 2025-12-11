@@ -15,21 +15,19 @@ const Nav4 = ({ onDrawSelect }) => {
     const u = localStorage.getItem("username");
     if (u) setUsername(u);
 
-    const tokenStr = localStorage.getItem("token");
-    let token = null;
-    try {
-      token = JSON.parse(tokenStr);
-    } catch {
-      token = tokenStr;
+    // 🚀 NEW BALANCE API (POST)
+    if (u) {
+      axios
+        .post("https://freedomplay.us/api/balance", {
+          username: u,
+        })
+        .then((res) => {
+          setBalance(res.data?.balance);
+        })
+        .catch((err) => {
+          console.error("Balance API Error:", err);
+        });
     }
-    if (!token) return;
-
-    axios
-      .get("https://thewonder.uk/royalgame/api/balance", {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((res) => setBalance(res.data?.balance))
-      .catch(() => {});
 
     generateRemainingDraws();
   }, []);
@@ -37,7 +35,7 @@ const Nav4 = ({ onDrawSelect }) => {
   const generateRemainingDraws = () => {
     const all = [];
     const s = new Date();
-    s.setHours(8, 0, 0, 0);
+    s.setHours(9, 0, 0, 0);
     const e = new Date();
     e.setHours(22, 0, 0, 0);
 
@@ -84,12 +82,13 @@ const Nav4 = ({ onDrawSelect }) => {
 
   const handleOk = () => {
     if (onDrawSelect) onDrawSelect(selectedDraws);
-    alert(`Selected Draws: ${selectedDraws.join(", ")}`);
+    // alert(`Selected Draws: ${selectedDraws.join(", ")}`);
   };
 
   return (
     <div
       className="container-fluid fw-bold py-0 px-0 px-sm-3 nav4-content"
+      style={{ marginTop: "-4px" }}
       id="nav4Container"
     >
       <div
@@ -195,6 +194,7 @@ const Nav4 = ({ onDrawSelect }) => {
           >
             CANCEL(F4)
           </button>
+
           <button
             type="button"
             className="btn text-light rounded-0 fw-bold desktop-big-font"
@@ -215,242 +215,205 @@ const Nav4 = ({ onDrawSelect }) => {
           </button>
         </div>
       </div>
-
-      {/* ==================== */}
-      {/* ADVANCED DRAW MODAL */}
-      {/* ==================== */}
+       {/* ================== ADVANCED DRAW MODAL (FULLY OPTIMIZED) ================== */}
+<div
+  className="modal fade"
+  id="staticBackdrop"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabIndex={-1}
+  aria-labelledby="staticBackdropLabel"
+  aria-hidden="true"
+>
+  <div
+    className="modal-dialog modal-dialog-centered"
+    style={{
+      maxWidth: "clamp(300px, 90vw, 900px)",
+      margin: "0 auto",
+    }}
+  >
+    <div
+      className="modal-content"
+      style={{
+        borderRadius: "0.5rem",
+        boxShadow: "0 5px 20px rgba(0,0,0,0.35)",
+      }}
+    >
+      {/* ================= HEADER ================= */}
       <div
-        className="modal fade"
-        id="staticBackdrop"
-        data-bs-backdrop="static"
-        data-bs-keyboard="false"
-        tabIndex={-1}
-        aria-labelledby="staticBackdropLabel"
-        aria-hidden="true"
+        className="modal-header"
         style={{
-          display: "flex !important",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: 0,
+          background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+          color: "white",
+          borderRadius: "0.5rem 0.5rem 0 0",
+          padding: "clamp(0.6rem, 2vw, 1rem)",
+          border: "none",
         }}
       >
-        <div
-          className="modal-dialog"
+        <h1
+          className="modal-title fw-bold"
+          id="staticBackdropLabel"
+          style={{ fontSize: "clamp(1rem, 3vw, 1.2rem)", margin: 0 }}
+        >
+          🎲 Advanced Draw
+        </h1>
+
+        <button
+          type="button"
+          className="btn-close btn-close-white"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          style={{ transform: "scale(0.9)" }}
+        ></button>
+      </div>
+
+      {/* ================= BODY ================= */}
+      <div
+        className="modal-body"
+        style={{
+          maxHeight: "75vh",
+          overflowY: "auto",
+          padding: "clamp(0.8rem, 2vw, 1.2rem)",
+        }}
+      >
+        <h5
+          className="fw-bold mb-2"
           style={{
-            maxWidth: "clamp(280px, 90vw, 500px)",
-            margin: 0,
-            position: "relative",
-            width: "auto",
-            pointerEvents: "none",
+            fontSize: "clamp(0.95rem, 2vw, 1.1rem)",
+            color: "#333",
+            textAlign: "center",
           }}
         >
-          <div
-            className="modal-content"
+          📅 Select Draw Times
+        </h5>
+
+        {/* Input Box */}
+        <div className="mb-3 text-center">
+          <input
+            type="text"
+            value={drawCount}
+            onChange={handleDrawCountChange}
+            placeholder="Enter number of draws"
+            className="form-control text-center fw-bold mx-auto d-block"
             style={{
-              borderRadius: "0.5rem",
-              boxShadow: "0 5px 20px rgba(0,0,0,0.35)",
-              pointerEvents: "auto",
+              width: "100%",
+              maxWidth: "230px",
+              fontSize: "clamp(0.85rem,1.8vw,1rem)",
+              padding: "0.5rem 0.7rem",
+              borderRadius: "0.45rem",
+              border: "2px solid #667eea",
+            }}
+          />
+        </div>
+
+        {/* Draw Time Buttons */}
+        <div
+          className="advanced-draw-buttons"
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            gap: "6px",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          {remainingDraws.length > 0 ? (
+            remainingDraws.map((time, index) => (
+              <button
+                key={index}
+                onClick={() => toggleDrawSelection(time)}
+                type="button"
+                className={`btn ${
+                  selectedDraws.includes(time)
+                    ? "btn-success"
+                    : "btn-outline-secondary"
+                }`}
+                style={{
+                  fontSize: "clamp(0.75rem,1.5vw,0.95rem)",
+                  padding: "0.3rem 0.55rem",
+                  minWidth: "60px",
+                  borderRadius: "0.3rem",
+                  flex: "0 0 auto",
+                  fontWeight: "600",
+                  transition: "0.2s ease",
+                  border: selectedDraws.includes(time)
+                    ? "none"
+                    : "1.5px solid #ccc",
+                }}
+              >
+                {time}
+              </button>
+            ))
+          ) : (
+            <p className="text-danger fw-bold py-2">No remaining draws today</p>
+          )}
+        </div>
+
+        {/* Selected Summary */}
+        {selectedDraws.length > 0 && (
+          <div
+            className="alert alert-info mt-3 mb-0 text-center fw-bold"
+            style={{
+              fontSize: "clamp(0.75rem, 1.6vw, 0.95rem)",
+              borderRadius: "0.4rem",
+              padding: "0.6rem",
             }}
           >
-            <div
-              className="modal-header"
-              style={{
-                background: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-                color: "white",
-                borderRadius: "0.5rem 0.5rem 0 0",
-                padding: "clamp(0.6rem, 2vw, 0.9rem)",
-                border: "none",
-              }}
-            >
-              <h1
-                className="modal-title fw-bold"
-                id="staticBackdropLabel"
-                style={{ fontSize: "clamp(0.45rem, 3vw, 1rem)", margin: 0 }}
-              >
-                🎲 Advanced Draw
-              </h1>
-              <button
-                type="button"
-                className="btn-close btn-close-white"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-                style={{ transform: "scale(0.8)" }}
-              ></button>
-            </div>
-
-            <div
-              className="modal-body"
-              style={{
-                maxHeight: "clamp(30vh, 60vh, 400px)",
-                overflowY: "auto",
-                padding: "clamp(0.8rem, 2.5vw, 1.2rem)",
-              }}
-            >
-              <h5
-                className="fw-bold mb-2 mb-sm-3"
-                style={{
-                  fontSize: "clamp(0.75rem, 2vw, 0.95rem)",
-                  color: "#333",
-                }}
-              >
-                📅 Select Draw Times
-              </h5>
-              <div className="mb-2 mb-sm-3 text-center">
-                <input
-                  type="text"
-                  value={drawCount}
-                  onChange={handleDrawCountChange}
-                  placeholder="Enter number of draws"
-                  className="form-control text-center fw-bold mx-auto d-block"
-                  style={{
-                    width: "100%",
-                    maxWidth: "200px",
-                    fontSize: "clamp(0.6rem,1.8vw,0.85rem)",
-                    padding: "0.4rem 0.6rem",
-                    borderRadius: "0.4rem",
-                    border: "2px solid #667eea",
-                  }}
-                />
-              </div>
-
-              <div
-                className="d-flex flex-wrap gap-1 gap-sm-2 justify-content-center"
-                style={{ width: "100%" }}
-              >
-                {remainingDraws.length > 0 ? (
-                  remainingDraws.map((time, index) => (
-                    <button
-                      key={index}
-                      type="button"
-                      className={
-                        selectedDraws.includes(time)
-                          ? "btn btn-success"
-                          : "btn btn-outline-secondary"
-                      }
-                      onClick={() => toggleDrawSelection(time)}
-                      style={{
-                        fontSize: "clamp(0.55rem,1.5vw,0.7rem)",
-                        padding: "0.25rem 0.45rem",
-                        minWidth: "48px",
-                        flex: "0 0 auto",
-                        borderRadius: "0.3rem",
-                        fontWeight: "600",
-                        transition: "all 0.2s ease",
-                        cursor: "pointer",
-                        border: selectedDraws.includes(time)
-                          ? "none"
-                          : "1.5px solid #dee2e6",
-                      }}
-                      onMouseEnter={(e) => {
-                        if (!selectedDraws.includes(time)) {
-                          e.target.style.background = "#e7f3ff";
-                          e.target.style.borderColor = "#667eea";
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (!selectedDraws.includes(time)) {
-                          e.target.style.background = "transparent";
-                          e.target.style.borderColor = "#dee2e6";
-                        }
-                      }}
-                    >
-                      {time}
-                    </button>
-                  ))
-                ) : (
-                  <div className="text-center py-3">
-                    <p
-                      className="text-danger fw-bold mb-0"
-                      style={{ fontSize: "clamp(0.6rem,1.8vw,0.8rem)" }}
-                    >
-                      ⏰ No remaining draws today
-                    </p>
-                  </div>
-                )}
-              </div>
-
-              {selectedDraws.length > 0 && (
-                <div
-                  className="alert alert-info mt-2 mt-sm-3 mb-0"
-                  style={{
-                    padding: "clamp(0.4rem,1.5vw,0.6rem)",
-                    fontSize: "clamp(0.55rem,1.3vw,0.7rem)",
-                    borderRadius: "0.4rem",
-                  }}
-                >
-                  <strong>Selected:</strong> {selectedDraws.length} draw
-                  {selectedDraws.length > 1 ? "s" : ""} -{" "}
-                  {selectedDraws.join(", ")}
-                </div>
-              )}
-            </div>
-
-            <div
-              className="modal-footer gap-1 gap-sm-2"
-              style={{
-                borderTop: "1px solid #e9ecef",
-                padding: "clamp(0.6rem,2vw,0.85rem)",
-              }}
-            >
-              <button
-                type="button"
-                className="btn flex-grow-1"
-                data-bs-dismiss="modal"
-                style={{
-                  background: "transparent",
-                  color: "#667eea",
-                  border: "1.5px solid #667eea",
-                  borderRadius: "0.3rem",
-                  fontWeight: "600",
-                  fontSize: "clamp(0.55rem,1.8vw,0.75rem)",
-                  padding: "0.35rem 0.6rem",
-                  cursor: "pointer",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = "#667eea";
-                  e.target.style.color = "white";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = "transparent";
-                  e.target.style.color = "#667eea";
-                }}
-              >
-                Cancel
-              </button>
-              <button
-                type="button"
-                className="btn flex-grow-1"
-                onClick={handleOk}
-                data-bs-dismiss="modal"
-                style={{
-                  background: "linear-gradient(135deg,#667eea 0%,#764ba2 100%)",
-                  color: "white",
-                  borderRadius: "0.3rem",
-                  fontWeight: "600",
-                  fontSize: "clamp(0.55rem,1.8vw,0.75rem)",
-                  padding: "0.35rem 0.6rem",
-                  cursor: "pointer",
-                  border: "none",
-                  transition: "all 0.2s ease",
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.transform = "translateY(-2px)";
-                  e.target.style.boxShadow = "0 5px 15px rgba(102,126,234,0.4)";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.transform = "translateY(0)";
-                  e.target.style.boxShadow = "none";
-                }}
-              >
-                ✓ Confirm
-              </button>
-            </div>
+            <strong>Selected: </strong>
+            {selectedDraws.length} draw
+            {selectedDraws.length > 1 ? "s" : ""} <br />
+            {selectedDraws.join(", ")}
           </div>
-        </div>
+        )}
+      </div>
+
+      {/* ================= FOOTER ================= */}
+      <div
+        className="modal-footer"
+        style={{
+          padding: "clamp(0.7rem,2vw,1rem)",
+          borderTop: "1px solid #eee",
+        }}
+      >
+        <button
+          type="button"
+          className="btn flex-grow-1 fw-bold"
+          data-bs-dismiss="modal"
+          style={{
+            background: "transparent",
+            color: "#667eea",
+            border: "1.5px solid #667eea",
+            borderRadius: "0.3rem",
+            fontSize: "clamp(0.8rem,1.6vw,1rem)",
+            padding: "0.45rem",
+          }}
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          className="btn flex-grow-1 fw-bold text-white"
+          style={{
+            background: "linear-gradient(135deg,#667eea,#764ba2)",
+            borderRadius: "0.3rem",
+            fontSize: "clamp(0.8rem,1.6vw,1rem)",
+            padding: "0.45rem",
+            border: "none",
+          }}
+          onClick={handleOk}
+          data-bs-dismiss="modal"
+        >
+          ✓ Confirm
+        </button>
       </div>
     </div>
-  );
-};
+  </div>
+</div>
+{/* ================== END ADVANCED DRAW MODAL ================== */}
+
+     </div>
+   );
+ };
 
 export default Nav4;
