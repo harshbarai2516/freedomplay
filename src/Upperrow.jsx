@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 export default function UpperRow() {
+
+
+
+  const navigate = useNavigate();
+
   const [timeData, setTimeData] = useState({});
   const [popup, setPopup] = useState("");
   const [prevTime, setPrevTime] = useState(null);
@@ -8,7 +13,7 @@ export default function UpperRow() {
   // ✅ Fetch time API
   const fetchTimeData = async () => {
     try {
-      const response = await fetch(`https://kgf3.us/api/time/getTime`);
+      const response = await fetch(`https://tenx.game.thegold.us/api/time/getTime`);
       const data = await response.json();
 
       if (data) {
@@ -75,6 +80,8 @@ export default function UpperRow() {
   const formatTimeWithoutSeconds = (timeString) =>
     timeString?.replace(/:\d{2}(?=\s*(AM|PM|am|pm))/i, "") || "";
 
+
+
   return (
     <div className="w-full bg-gray-100 px-1 py-0.5">
       {/* Popup Notification */}
@@ -84,11 +91,11 @@ export default function UpperRow() {
         </div>
       )}
 
-   
 
-        <div className="flex items-center gap-[0.6vw] flex-wrap pb-[0.5vw]">
 
-               {/* CT (Current Time) */}
+      <div className="flex items-center gap-[0.6vw] flex-wrap pb-[0.5vw]">
+
+        {/* CT (Current Time) */}
         <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.6vw] py-[0.3vw]">
           <span className="bg-black text-white text-[1.5vw] font-bold rounded px-[0.3vw] mr-[0.3vw] portrait:text-[2.2vw]">
             CT
@@ -117,43 +124,57 @@ export default function UpperRow() {
         </div>
 
 
-          {/* Static Buttons */}
-          {["RESULT", "ACCOUNT", "REPRINT", "CANCEL", "REFRESH"].map((label) => (
+
+
+        {/* Navigation Buttons */}
+        {["RESULT", "ACCOUNT", "REPRINT", "CANCEL", "REFRESH"].map((label) => {
+          const handleClick = () => {
+            if (label === "RESULT") navigate("/ogresult");
+            else if (label === "ACCOUNT") navigate("/account2d");
+            else if (label === "REPRINT") console.log("Reprint clicked");
+            else if (label === "CANCEL") console.log("Cancel clicked");
+            else if (label === "REFRESH") window.location.reload();
+          };
+
+          return (
             <button
               key={label}
+              onClick={handleClick}
               className="flex-shrink-0 bg-lime-400 border border-black rounded-lg font-bold 
-              px-[0.8vw] py-[0.3vw] text-[1.1vw] hover:brightness-105 active:brightness-90 transition truncate 
-              portrait:text-[2.2vw] portrait:px-[0.5vw]"
+                px-[0.8vw] py-[0.3vw] text-[1.1vw] hover:brightness-105 active:brightness-90 transition truncate 
+                portrait:text-[2.5vw] portrait:px-[0.8vw] portrait:py-[1.2vw]"
             >
               {label}
             </button>
-          ))}
-          <button className="bg-red-600 text-white font-semibold rounded-md px-[0.8vw] py-[0.3vw] text-[1.4vw] portrait:hidden" onClick={() => navigate('/home')}>
-            3D Game
-          </button>
-          <button className="bg-black text-white  px-[0.8vw] py-[0.3vw] text-[1.4vw] portrait:hidden">
-            Password
-          </button>
-          <button className="bg-black text-white  px-[0.8vw] py-[0.3vw] text-[1vw] portrait:hidden">
-            Logout
-          </button>
-          <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw] portrait:hidden">
-            <span className="text-[1.2vw] font-bold leading-tight portrait:text-[2.3vw]">Balance</span>
-            <span className="ml-[0.3vw] bg-white text-red-600 font-extrabold text-[1.2vw] px-[0.5vw] py-[0.1vw] rounded border border-black truncate portrait:text-[2.3vw]">
-              10000$
-            </span>
-          </div>
+          );
+        })}
 
+        <button className="bg-red-600 text-white font-semibold rounded-md px-[0.8vw] py-[0.3vw] text-[1.4vw] portrait:hidden" onClick={() => navigate('/home')}>
+          3D Game
+        </button>
+        <button className="bg-black text-white  px-[0.8vw] py-[0.3vw] text-[1.4vw] portrait:hidden">
+          Password
+        </button>
+        <button className="bg-black text-white  px-[0.8vw] py-[0.3vw] text-[1vw] portrait:hidden">
+          Logout
+        </button>
+        <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw] portrait:hidden">
+          <span className="text-[1.2vw] font-bold leading-tight portrait:text-[2.3vw]">Balance</span>
+          <span className="ml-[0.3vw] bg-white text-red-600 font-extrabold text-[1.2vw] px-[0.5vw] py-[0.1vw] rounded border border-black truncate portrait:text-[2.3vw]">
+            10000$
+          </span>
         </div>
 
-        {/* Balance Box */}
-        {/* <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw] portrait:hidden">
+      </div>
+
+      {/* Balance Box */}
+      {/* <div className="flex-shrink-0 flex items-center bg-yellow-300 border border-black rounded-lg px-[0.8vw] py-[0.3vw] portrait:hidden">
           <span className="text-[0.8vw] font-bold leading-tight portrait:text-[2.3vw]">Balance</span>
           <span className="ml-[0.3vw] bg-white text-red-600 font-extrabold text-[0.8vw] px-[0.5vw] py-[0.1vw] rounded border border-black truncate portrait:text-[2.3vw]">
             10000$
           </span>
         </div> */}
-      </div>
+    </div>
 
   );
 }

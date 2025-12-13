@@ -10,6 +10,11 @@ import Reprint3D from "./Reprint3D.jsx";
 import Cancel3D from "./Cancel3D.jsx";
 import Account3D from "./Account3D.jsx";
 import Result3D from "./Result3D.jsx";
+import Testing from "./Testing.jsx";
+import Advancedraw from "../../Advancedraw.jsx";
+import Account2D from "../../Account2D.jsx";
+import Ogresult from "../../Ogresult.jsx";
+
 
 export default function Sigma() {
   return (
@@ -26,6 +31,9 @@ export default function Sigma() {
       <Route path="/cancel" element={<Cancel3D/>} />
       <Route path="/account" element={<Account3D/>}/>
      <Route path="/result" element={<Result3D/>}/>
+     <Route path="/account2d" element={<Account2D/>}/>
+      <Route path="/advancedraw" element={<Advancedraw/>}/>
+      <Route path="/ogresult" element={<Ogresult/>}/>
       </Routes>
     </HashRouter>
   );

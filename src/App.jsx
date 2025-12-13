@@ -5,6 +5,8 @@ import './App.css'
 import Home from './Home.jsx'
 import Sigma from './assets/threed/Sigma.jsx'
 
+//https://kgf3.us/api/record/notification
+
 function App() {
   return (
     <Sigma />

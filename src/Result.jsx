@@ -8,7 +8,7 @@ export default function Result({ mainRange }) {
   // ✅ Fetch API results
   const fetchResults = async () => {
     try {
-      const res = await fetch("https://freedomplay.us/api/results/current");
+      const res = await fetch("https://tenx.game.thegold.us/api/results/current");
       const data = await res.json();
 
       if (data?.ok && data?.result?.result) {
